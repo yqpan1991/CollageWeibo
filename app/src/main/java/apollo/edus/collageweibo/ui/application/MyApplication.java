@@ -9,6 +9,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import apollo.edus.collageweibo.biz.global.EsGlobal;
+
 /**
  * Created by panyongqiang on 16/5/20.
  */
@@ -28,6 +30,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        EsGlobal.setGlobalContext(this);
         initImageLoader(getApplicationContext());
         Fresco.initialize(getApplicationContext());
     }
