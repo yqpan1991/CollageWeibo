@@ -16,5 +16,9 @@ public class HomeFragment extends EsBaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
+
+    public void scrollToTop(boolean refreshData){
+
+    }
     
 }
