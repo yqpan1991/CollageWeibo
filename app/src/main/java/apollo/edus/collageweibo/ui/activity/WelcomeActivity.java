@@ -21,6 +21,7 @@ public class WelcomeActivity extends Activity {
             @Override
             public void run() {
                 startNextActivity();
+                finish();
             }
         },2000);
     }
