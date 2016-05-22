@@ -36,6 +36,8 @@
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.SettingActivity" />
         <activity android:name=".ui.activity.MyProfileDetailActivity" />
+        <activity android:name=".ui.activity.AlbumActivity" />
+        <activity android:name=".ui.activity.IdeaActivity" />
 
     </application>
 

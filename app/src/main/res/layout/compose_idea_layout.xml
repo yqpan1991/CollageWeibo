@@ -49,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:visibility="gone"
         android:gravity="center_horizontal"
         android:paddingBottom="9dp"
         android:paddingTop="9dp">
@@ -120,6 +121,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:visibility="gone"
             android:src="@drawable/compose_emoticonbutton_background_auto" />
 
         <ImageView
@@ -127,6 +129,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:visibility="gone"
             android:src="@drawable/compose_toolbar_more_auto" />
 
     </LinearLayout>
