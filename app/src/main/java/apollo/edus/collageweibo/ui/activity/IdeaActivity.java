@@ -9,18 +9,24 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 
 import apollo.edus.collageweibo.R;
 import apollo.edus.collageweibo.biz.bean.AlbumFolderInfo;
 import apollo.edus.collageweibo.biz.bean.ImageInfo;
+import apollo.edus.collageweibo.biz.net.api.EsApiHelper;
 import apollo.edus.collageweibo.ui.imglist.ImgListAdapter;
 import apollo.edus.collageweibo.utils.ToastUtil;
 
@@ -28,6 +34,8 @@ import apollo.edus.collageweibo.utils.ToastUtil;
  * Created by wenmingvs on 16/5/2.
  */
 public class IdeaActivity extends Activity implements ImgListAdapter.OnFooterViewClickListener {
+
+    private final String TAG = this.getClass().getSimpleName();
 
 //    private StatusesAPI mStatusesAPI;
 //    private Oauth2AccessToken mAccessToken;
@@ -202,14 +210,41 @@ public class IdeaActivity extends Activity implements ImgListAdapter.OnFooterVie
                     return;
                 }
 
-                //TODO -------------release weibo------------
-/*                Intent intent = new Intent(mContext, PostService.class);
-                intent.putParcelableArrayListExtra("select_img", mSelectImgList);
-                intent.putExtra("content", mEditText.getText().toString());
-                intent.putExtra("status", mStatus);
-                startService(intent);
-                finish();*/
+                if (mSelectImgList.size() > 1) {
+                    ToastUtil.showShort(mContext, "目前仅支持一张图片上传");
+                    return;
+                }
 
+                if(mSelectImgList.isEmpty()){
+                    EsApiHelper.shareContentWeibo(mEditText.getText().toString(), new Response.Listener<String>() {
+
+                        @Override
+                        public void onResponse(String s) {
+                            Log.e(TAG,"SUC:"+s);
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            Log.e(TAG,"fail:"+volleyError.toString());
+                        }
+                    });
+                }else{
+                    //send
+                    EsApiHelper.shareImageWeibo(mEditText.getText().toString(), mSelectImgList, new Response.Listener<String>(){
+
+                        @Override
+                        public void onResponse(String s) {
+                            Toast.makeText(getApplicationContext(), "suc:"+s, Toast.LENGTH_SHORT).show();
+                        }
+                    }, new Response.ErrorListener(){
+
+                        @Override
+                        public void onErrorResponse(VolleyError volleyError) {
+                            Toast.makeText(getApplicationContext(), "error:"+volleyError, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                finish();
             }
         });
 
