@@ -18,6 +18,19 @@
             android:text="个人资料"
             android:textColor="#525252"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:text="保存"
+            android:textColor="@color/toolbar_textview_background_auto"
+            android:textSize="18sp" />
+
+
     </RelativeLayout>
 
     <FrameLayout
@@ -28,7 +41,6 @@
             android:id="@+id/ic_loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
             layout="@layout/loading_layout" />
 
         <TextView
@@ -36,7 +48,6 @@
             android:text="数据加载失败,点击重试"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
             android:gravity="center" />
 
         <include

@@ -8,7 +8,7 @@
     android:focusableInTouchMode="false" >
 
     <ProgressBar
-        android:id="@+id/grid_progress"
+        android:id="@+id/pb_progress"
         style="@style/LoadingProgressStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
-        android:layout_toRightOf="@id/grid_progress"
+        android:layout_toRightOf="@id/pb_progress"
         android:clickable="false"
         android:focusableInTouchMode="false"
         android:text="加载中" />
