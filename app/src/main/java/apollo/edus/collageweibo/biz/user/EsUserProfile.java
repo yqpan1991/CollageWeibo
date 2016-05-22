@@ -1,7 +1,11 @@
 package apollo.edus.collageweibo.biz.user;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -23,9 +27,9 @@ public class EsUserProfile {
     @SerializedName("school")
     private String school;
     @SerializedName("admission_time")
-    private Date admissionTime;
+    private String admissionTime;
     @SerializedName("birth")
-    private Date birth;
+    private String birth;
     @SerializedName("sex")
     private int sex;
 
@@ -71,19 +75,45 @@ public class EsUserProfile {
     }
 
     public Date getAdmissionTime() {
-        return admissionTime;
+        if(TextUtils.isEmpty(admissionTime)){
+            return null;
+        }else{
+            try {
+                return new SimpleDateFormat("yyyy-MM-dd").parse(admissionTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
     }
 
     public void setAdmissionTime(Date admissionTime) {
-        this.admissionTime = admissionTime;
+        if(admissionTime != null){
+            this.admissionTime = new SimpleDateFormat("yyyy-MM-dd").format(admissionTime);
+        }else{
+            this.admissionTime = null;
+        }
     }
 
     public Date getBirth() {
-        return birth;
+        if(TextUtils.isEmpty(admissionTime)){
+            return null;
+        }else{
+            try {
+                return new SimpleDateFormat("yyyy-MM-dd").parse(admissionTime);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
     }
 
     public void setBirth(Date birth) {
-        this.birth = birth;
+        if(admissionTime != null){
+            this.birth = new SimpleDateFormat("yyyy-MM-dd").format(admissionTime);
+        }else{
+            this.birth = null;
+        }
     }
 
     public int getSex() {

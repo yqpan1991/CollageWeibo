@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import apollo.edus.collageweibo.R;
+import apollo.edus.collageweibo.biz.user.EsUserManager;
 import apollo.edus.collageweibo.ui.application.MyApplication;
 import apollo.edus.collageweibo.ui.fragment.DiscoverFragment;
 import apollo.edus.collageweibo.ui.fragment.HomeFragment;
@@ -205,4 +206,9 @@ public class MainActivity extends FragmentActivity {
         return false;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EsUserManager.destory();
+    }
 }

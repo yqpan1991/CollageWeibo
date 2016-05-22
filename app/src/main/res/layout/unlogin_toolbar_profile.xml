@@ -24,6 +24,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="8dp"
         android:text="设置"
+        android:visibility="gone"
         android:textColor="@color/toolbar_textview_background_auto"
         android:textSize="18sp" />
 

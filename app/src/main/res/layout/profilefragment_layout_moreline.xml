@@ -5,6 +5,7 @@
               android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl_my_profile"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
@@ -41,6 +42,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_new_friend"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="0.5dp"
@@ -151,6 +153,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_my_favorite"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="0.5dp"
@@ -458,6 +461,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/rl_settings"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginBottom="10dp"

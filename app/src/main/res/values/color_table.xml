@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_black_alpha_2">#05000000</color>
+    <color name="color_black_alpha_3">#08000000</color>
+    <color name="color_black_alpha_4">#0A000000</color>
+    <color name="color_black_alpha_5">#0C000000</color>
+    <color name="color_black_alpha_6">#0D000000</color>
+    <color name="color_black_alpha_8">#14000000</color>
+    <color name="color_black_alpha_10">#1a000000</color>
+    <color name="color_black_alpha_12">#1f000000</color>
+    <color name="color_black_alpha_15">#27000000</color>
+    <color name="color_black_alpha_20">#33000000</color>
+    <color name="color_black_alpha_30">#4d000000</color>
+    <color name="color_black_alpha_40">#66000000</color>
+    <color name="color_black_alpha_50">#7e000000</color>
+    <color name="color_black_alpha_54">#7e000000</color> <!-- ui change -->
+    <color name="color_black_alpha_60">#99000000</color>
+    <color name="color_black_alpha_64">#A3000000</color>
+    <color name="color_black_alpha_70">#B3000000</color>
+    <color name="color_black_alpha_75">#C0000000</color>
+    <color name="color_black_alpha_80">#cc000000</color>
+    <color name="color_black_alpha_84">#d6000000</color>
+    <color name="color_black_alpha_87">#de000000</color>
+    <color name="color_black_alpha_90">#e6000000</color>
+    <color name="color_white_alpha_20">#33ffffff</color>
+    <color name="color_white_alpha_30">#4dffffff</color>
+    <color name="color_white_alpha_70">#B3ffffff</color>
+    <color name="color_white_alpha_87">#deffffff</color>
+    <color name="color_white_alpha_40">#66ffffff</color>
+    <color name="color_white_alpha_50">#7effffff</color>
+    <color name="color_white_alpha_60">#99ffffff</color>
+    <color name="color_white_alpha_90">#e6ffffff</color>
+</resources>

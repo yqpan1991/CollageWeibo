@@ -11,7 +11,7 @@ public class EsUser {
     private String userName;
     @SerializedName("pwd")
     private String password;
-    @SerializedName("userId")
+    @SerializedName("id")
     private String userId;
 
 

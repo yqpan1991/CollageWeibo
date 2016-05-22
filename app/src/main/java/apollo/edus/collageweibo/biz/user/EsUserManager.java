@@ -16,6 +16,7 @@ public class EsUserManager {
 
     private static final String SETTING_NATIVE_USERINFO = null;
     private static final String KEY_NATIVE_USERINFO = "native_userinfo";
+    private static final String KEY_NATIVE_USERPROFILE = "native_userprofile";
 
     public static int USER_TYPE_NORMAL = 0;
     public static int USER_TYPE_ADMIN = 1;
@@ -74,6 +75,14 @@ public class EsUserManager {
 
     public void clearNativeSaveUserInfo() {
         EsPreferencesUtils.putString(EsGlobal.getGlobalContext(), KEY_NATIVE_USERINFO, null);
+    }
+
+    public void setUserProfile(EsUserProfile profile){
+        EsPreferencesUtils.putString(EsGlobal.getGlobalContext(), KEY_NATIVE_USERPROFILE, new Gson().toJson(profile));
+    }
+
+    public EsUserProfile getUserProfile(){
+        return new Gson().fromJson(EsPreferencesUtils.getString(EsGlobal.getGlobalContext(), KEY_NATIVE_USERPROFILE, null), EsUserProfile.class);
     }
 
     private void stop(){
