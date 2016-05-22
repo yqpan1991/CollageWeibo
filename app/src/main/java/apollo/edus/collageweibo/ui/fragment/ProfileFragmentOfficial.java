@@ -1,8 +1,10 @@
 package apollo.edus.collageweibo.ui.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,9 @@ import android.widget.TextView;
 
 import apollo.edus.collageweibo.R;
 import apollo.edus.collageweibo.biz.user.EsUserManager;
+import apollo.edus.collageweibo.biz.user.EsUserProfile;
 import apollo.edus.collageweibo.ui.activity.LoginActivity;
+import apollo.edus.collageweibo.ui.activity.MyProfileDetailActivity;
 import apollo.edus.collageweibo.ui.activity.RegisterActivity;
 import apollo.edus.collageweibo.ui.activity.SettingActivity;
 
@@ -21,6 +25,7 @@ import apollo.edus.collageweibo.ui.activity.SettingActivity;
  * Created by panyongqiang on 16/5/20.
  */
 public class ProfileFragmentOfficial extends EsBaseFragment implements EsUserManager.OnUserLogOperationListener {
+    private static final int REQUEST_CODE_UPDATE_PROFILE = 1000;
 
     private final String TAG = this.getClass().getSimpleName();
 
@@ -41,6 +46,7 @@ public class ProfileFragmentOfficial extends EsBaseFragment implements EsUserMan
     private RelativeLayout mRlMyProfile;
     private RelativeLayout mRlNewFriend;
     private RelativeLayout mRlSettings;
+    private RelativeLayout mRlMyFavorite;
 
     @Nullable
     @Override
@@ -68,20 +74,35 @@ public class ProfileFragmentOfficial extends EsBaseFragment implements EsUserMan
         if(EsUserManager.getInstance().hasLogIn()){
             showUnloginView(false);
             showLogedInView(true);
-            clearLoginData();
-            loadLoginData();
+            clearLogedInData();
+            loadLogedInData();
         }else{
             showUnloginView(true);
             showLogedInView(false);
         }
     }
 
-    private void loadLoginData() {
-
+    private void loadLogedInData() {
+        EsUserProfile userProfile = EsUserManager.getInstance().getUserProfile();
+        if(userProfile != null){
+            mTvWeiboCount.setText(userProfile.getWeibo()+"");
+            mTvFriendCount.setText(userProfile.getFans()+"");
+            mTvFollowersCount.setText(userProfile.getAttention()+"");
+            mTvUserName.setText(userProfile.getNickName());
+            if(TextUtils.isEmpty(userProfile.getUserSgin())){
+                mTvDesc.setText("用户很懒,没有签名");
+            }else{
+                mTvDesc.setText(userProfile.getUserSgin());
+            }
+        }
     }
 
-    private void clearLoginData() {
-        //clear view render data
+    private void clearLogedInData() {
+        mTvWeiboCount.setText("0");
+        mTvFriendCount.setText("0");
+        mTvFollowersCount.setText("0");
+        mTvUserName.setText("");
+        mTvDesc.setText("用户很懒,没有签名");
     }
 
     private void showLogedInView(boolean show) {
@@ -128,9 +149,29 @@ public class ProfileFragmentOfficial extends EsBaseFragment implements EsUserMan
         mTvFriendCount = (TextView) rootView.findViewById(R.id.profile_friends_count);
         mLlFollowers = (LinearLayout) rootView.findViewById(R.id.followers_layout);
         mTvFollowersCount = (TextView) rootView.findViewById(R.id.profile_followers_count);
-        mRlMyProfile = (RelativeLayout) rootView.findViewById(R.id.rl_my_favorite);
+        mRlMyProfile = (RelativeLayout) rootView.findViewById(R.id.rl_my_profile);
+        mRlMyFavorite = (RelativeLayout) rootView.findViewById(R.id.rl_my_favorite);
         mRlNewFriend = (RelativeLayout) rootView.findViewById(R.id.rl_new_friend);
         mRlSettings = (RelativeLayout) rootView.findViewById(R.id.rl_settings);
+
+        mRlMyProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(getActivity(), MyProfileDetailActivity.class), REQUEST_CODE_UPDATE_PROFILE);
+            }
+        });
+        mRlMyFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        mRlNewFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         mRlSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,8 +191,20 @@ public class ProfileFragmentOfficial extends EsBaseFragment implements EsUserMan
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == REQUEST_CODE_UPDATE_PROFILE){
+                loadLogedInData();
+            }
+        }
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         EsUserManager.getInstance().unregisterOnUserLogOperationListener(this);
     }
+
+
 }

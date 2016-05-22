@@ -34,6 +34,13 @@ public class EsUserProfile {
     @SerializedName("sex")
     private int sex;
 
+    @SerializedName("weibo")
+    private long weibo;
+    @SerializedName("fans")
+    private long fans;
+    @SerializedName("attention")
+    private long attention;
+
     public String getAvatorUrl() {
         return avatorUrl;
     }
@@ -125,4 +132,27 @@ public class EsUserProfile {
         this.sex = sex;
     }
 
+    public long getWeibo() {
+        return weibo;
+    }
+
+    public long getFans() {
+        return fans;
+    }
+
+    public long getAttention() {
+        return attention;
+    }
+
+    public void setWeibo(long weibo) {
+        this.weibo = weibo;
+    }
+
+    public void setFans(long fans) {
+        this.fans = fans;
+    }
+
+    public void setAttention(long attention) {
+        this.attention = attention;
+    }
 }

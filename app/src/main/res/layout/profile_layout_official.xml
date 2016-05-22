@@ -80,7 +80,6 @@
         android:id="@+id/ll_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:orientation="vertical">
 
         <include layout="@layout/toolbar_profile" />
@@ -100,7 +99,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="1dp"
-                    android:background="@drawable/message_item_auto"
+                    android:background="@color/white"
                     android:clickable="true"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp">
@@ -147,7 +146,8 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="15dp"
-                        android:src="@drawable/weibobrowser_goforward_disabled" />
+                        android:src="@drawable/weibobrowser_goforward_disabled"
+                        android:visibility="gone" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -172,7 +172,7 @@
                             android:id="@+id/profile_statuses_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1806"
+                            android:text="0"
                             android:textColor="#222222" />
 
 
@@ -201,7 +201,7 @@
                             android:id="@+id/profile_friends_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="202"
+                            android:text="0"
                             android:textColor="#222222" />
 
 
@@ -230,7 +230,7 @@
                             android:id="@+id/profile_followers_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1614"
+                            android:text="0"
                             android:textColor="#222222" />
 
 

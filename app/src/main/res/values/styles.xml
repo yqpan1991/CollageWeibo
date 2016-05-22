@@ -12,7 +12,19 @@
 
         <item name="android:windowBackground">@color/weibo_holo_bg</item>
         <item name="android:statusBarColor">@color/black</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
 
+    </style>
+
+    <style name="LoadingProgressStyle" parent="@android:style/Widget.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/loading_progress</item>
+        <item name="android:indeterminateDuration">5000</item>
+        <item name="android:minWidth">32dip</item>
+        <item name="android:maxWidth">32dip</item>
+        <item name="android:minHeight">32dip</item>
+        <item name="android:maxHeight">32dip</item>
     </style>
 
 </resources>
