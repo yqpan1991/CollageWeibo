@@ -20,6 +20,7 @@ import apollo.edus.collageweibo.ui.fragment.DiscoverFragment;
 import apollo.edus.collageweibo.ui.fragment.HomeFragment;
 import apollo.edus.collageweibo.ui.fragment.MessageFragment;
 import apollo.edus.collageweibo.ui.fragment.ProfileFragment;
+import apollo.edus.collageweibo.ui.fragment.ProfileFragmentOfficial;
 
 /**
  * Created by panyongqiang on 16/5/20.
@@ -36,7 +37,7 @@ public class MainActivity extends FragmentActivity {
     private HomeFragment mHomeFragment;
     private MessageFragment mMessageFragment;
     private DiscoverFragment mDiscoverFragment;
-    private ProfileFragment mProfileFragment;
+    private ProfileFragmentOfficial mProfileFragment;
 
     private FragmentManager mFragmentManager;
     private RelativeLayout mHomeTab, mMessageTab, mDiscoeryTab, mProfile;
@@ -146,7 +147,7 @@ public class MainActivity extends FragmentActivity {
                 case PROFILE_FRAGMENT:
                     mProfile.setSelected(true);
                     if (mProfileFragment == null) {
-                        mProfileFragment = new ProfileFragment();
+                        mProfileFragment = new ProfileFragmentOfficial();
                         transaction.add(R.id.contentLayout, mProfileFragment);
                     } else {
                         transaction.show(mProfileFragment);
