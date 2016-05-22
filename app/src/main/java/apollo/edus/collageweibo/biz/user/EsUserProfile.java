@@ -20,8 +20,6 @@ public class EsUserProfile {
     private String nickName;
     @SerializedName("user_sgin")
     private String userSgin;//签名
-    @SerializedName("constellation")
-    private String constellation;//星座
     @SerializedName("school")
     private String school;
     @SerializedName("admission_time")
@@ -63,13 +61,6 @@ public class EsUserProfile {
         this.userSgin = userSgin;
     }
 
-    public String getConstellation() {
-        return constellation;
-    }
-
-    public void setConstellation(String constellation) {
-        this.constellation = constellation;
-    }
 
     public String getSchool() {
         return school;
