@@ -65,5 +65,9 @@ public class EsApiHelper {
 
     }
 
+    public static void userLogout(){
+
+    }
+
 
 }

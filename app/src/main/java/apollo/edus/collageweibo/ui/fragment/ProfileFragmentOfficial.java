@@ -15,6 +15,7 @@ import apollo.edus.collageweibo.R;
 import apollo.edus.collageweibo.biz.user.EsUserManager;
 import apollo.edus.collageweibo.ui.activity.LoginActivity;
 import apollo.edus.collageweibo.ui.activity.RegisterActivity;
+import apollo.edus.collageweibo.ui.activity.SettingActivity;
 
 /**
  * Created by panyongqiang on 16/5/20.
@@ -130,6 +131,12 @@ public class ProfileFragmentOfficial extends EsBaseFragment implements EsUserMan
         mRlMyProfile = (RelativeLayout) rootView.findViewById(R.id.rl_my_favorite);
         mRlNewFriend = (RelativeLayout) rootView.findViewById(R.id.rl_new_friend);
         mRlSettings = (RelativeLayout) rootView.findViewById(R.id.rl_settings);
+        mRlSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), SettingActivity.class));
+            }
+        });
     }
 
     @Override

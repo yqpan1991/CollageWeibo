@@ -85,6 +85,10 @@ public class EsUserManager {
         return new Gson().fromJson(EsPreferencesUtils.getString(EsGlobal.getGlobalContext(), KEY_NATIVE_USERPROFILE, null), EsUserProfile.class);
     }
 
+    public void clearNativeUserProfile(){
+        EsPreferencesUtils.putString(EsGlobal.getGlobalContext(), KEY_NATIVE_USERPROFILE, null);
+    }
+
     private void stop(){
         mOnUserLogOperationList.clear();
     }
