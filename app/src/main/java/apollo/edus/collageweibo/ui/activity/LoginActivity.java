@@ -91,13 +91,17 @@ public class LoginActivity extends Activity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                isLogin = false;
+                mProgressDialog.dismiss();
+                mProgressDialog = null;
+                Toast.makeText(EsGlobal.getGlobalContext(), volleyError.toString(), Toast.LENGTH_SHORT).show();
                 Log.e(TAG,"error:"+volleyError.toString());
             }
         });
     }
 
     private void handleUserLoginSuc(String s) {
-        Toast.makeText(EsGlobal.getGlobalContext(), "result:"+s, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(EsGlobal.getGlobalContext(), "result:"+s, Toast.LENGTH_SHORT).show();
         //save info
         //parse json, save to UserProfile and EsUser
         Gson gson = new Gson();

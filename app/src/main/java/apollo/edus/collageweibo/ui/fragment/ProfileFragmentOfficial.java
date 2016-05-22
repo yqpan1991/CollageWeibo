@@ -14,6 +14,7 @@ import android.widget.TextView;
 import apollo.edus.collageweibo.R;
 import apollo.edus.collageweibo.biz.user.EsUserManager;
 import apollo.edus.collageweibo.ui.activity.LoginActivity;
+import apollo.edus.collageweibo.ui.activity.RegisterActivity;
 
 /**
  * Created by panyongqiang on 16/5/20.
@@ -102,7 +103,7 @@ public class ProfileFragmentOfficial extends EsBaseFragment implements EsUserMan
         mTvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getActivity(), RegisterActivity.class));
             }
         });
         mTvLogin.setOnClickListener(new View.OnClickListener(){
@@ -139,5 +140,11 @@ public class ProfileFragmentOfficial extends EsBaseFragment implements EsUserMan
     @Override
     public void onUserLout() {
         checkLoadData();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        EsUserManager.getInstance().unregisterOnUserLogOperationListener(this);
     }
 }

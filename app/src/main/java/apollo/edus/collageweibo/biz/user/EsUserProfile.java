@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Created by Panda on 2016/5/21.
@@ -123,4 +124,5 @@ public class EsUserProfile {
     public void setSex(int sex) {
         this.sex = sex;
     }
+
 }

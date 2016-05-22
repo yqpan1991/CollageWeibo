@@ -9,4 +9,5 @@ public class EsApiKeys {
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSOWORD = "pwd";
     public static final String KEY_PORT = "por";
+    public static final String KEY_NICKNAME = "nickname";
 }

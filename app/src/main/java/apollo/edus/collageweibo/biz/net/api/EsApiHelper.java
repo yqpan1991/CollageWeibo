@@ -33,8 +33,19 @@ public class EsApiHelper {
         VolleySingleton.addRequest(stringRequest);
     }
 
-    public static void registerUser() {
-
+    public static void registerUser(final String userName, final String password, final String nickName,Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getHost(), listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put(EsApiKeys.KEY_PORT, "1001");
+                hashMap.put(EsApiKeys.KEY_USERNAME, userName);
+                hashMap.put(EsApiKeys.KEY_PASSOWORD, EsMd5Util.toMd5(password));
+                hashMap.put(EsApiKeys.KEY_NICKNAME, nickName);
+                return hashMap;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
     }
 
     public static void uploadUserAvator() {
