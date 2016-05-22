@@ -44,7 +44,7 @@
             android:layout_marginLeft="11dp"
             android:layout_toRightOf="@id/tv_username"
             android:background="@null"
-            android:text="15884355963"
+            android:text="18658108297"
             android:hint="请输入用户名"
             android:inputType="phone"
             android:singleLine="true"

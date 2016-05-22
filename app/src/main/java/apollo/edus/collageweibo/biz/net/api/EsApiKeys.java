@@ -16,4 +16,6 @@ public class EsApiKeys {
     public static final String KEY_USERID = "userid";
     public static final String KEY_CONTNETS = "contents";
     public static final String KEY_WEIBO_ID = "weibo_id";
+    public static final String KEY_DATA = "data";
+    public static final String KEY_SUFFIX = "suffix";
 }
