@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +13,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 
 import apollo.edus.collageweibo.R;
+import apollo.edus.collageweibo.biz.bean.WeiboResult;
+import apollo.edus.collageweibo.biz.net.api.EsApiHelper;
 import apollo.edus.collageweibo.biz.user.EsUserManager;
 import apollo.edus.collageweibo.biz.user.EsUserProfile;
 import apollo.edus.collageweibo.ui.activity.LoginActivity;
 import apollo.edus.collageweibo.ui.activity.MyProfileDetailActivity;
+import apollo.edus.collageweibo.ui.activity.MyWeiboActivity;
 import apollo.edus.collageweibo.ui.activity.RegisterActivity;
 import apollo.edus.collageweibo.ui.activity.SettingActivity;
 
@@ -154,6 +163,12 @@ public class ProfileFragmentOfficial extends EsBaseFragment implements EsUserMan
         mRlNewFriend = (RelativeLayout) rootView.findViewById(R.id.rl_new_friend);
         mRlSettings = (RelativeLayout) rootView.findViewById(R.id.rl_settings);
 
+        mLlWebibo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkStartWeiboActivity();
+            }
+        });
         mRlMyProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,6 +193,25 @@ public class ProfileFragmentOfficial extends EsBaseFragment implements EsUserMan
                 startActivity(new Intent(getActivity(), SettingActivity.class));
             }
         });
+    }
+
+    private void checkStartWeiboActivity() {
+        startActivity(new Intent(getActivity(), MyWeiboActivity.class));
+/*        String userID = EsUserManager.getInstance().getUserInfo().getUserId();
+        EsApiHelper.fetchUserWeiboList(userID, 2, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String s) {
+                Log.e(TAG,"suc:"+s);
+                Gson gson = new Gson();
+                WeiboResult weiboResult = gson.fromJson(s, WeiboResult.class);
+                Log.e(TAG,gson.toJson(weiboResult).toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Toast.makeText(getContext(), volleyError.toString(),Toast.LENGTH_SHORT).show();
+            }
+        });*/
     }
 
     @Override

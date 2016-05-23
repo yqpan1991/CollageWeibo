@@ -26,8 +26,11 @@ import java.util.ArrayList;
 import apollo.edus.collageweibo.R;
 import apollo.edus.collageweibo.biz.bean.AlbumFolderInfo;
 import apollo.edus.collageweibo.biz.bean.ImageInfo;
+import apollo.edus.collageweibo.biz.bean.WeiboResult;
 import apollo.edus.collageweibo.biz.net.api.EsApiHelper;
+import apollo.edus.collageweibo.biz.user.EsUserManager;
 import apollo.edus.collageweibo.ui.imglist.ImgListAdapter;
+import apollo.edus.collageweibo.utils.FillContent;
 import apollo.edus.collageweibo.utils.ToastUtil;
 
 /**
@@ -63,7 +66,7 @@ public class IdeaActivity extends Activity implements ImgListAdapter.OnFooterVie
 
     private ArrayList<AlbumFolderInfo> mFolderList = new ArrayList<AlbumFolderInfo>();
     private ArrayList<ImageInfo> mSelectImgList = new ArrayList<ImageInfo>();
-//    private Status mStatus;
+    private WeiboResult.WeiboInfo mStatus;
 
 
     @Override
@@ -117,14 +120,26 @@ public class IdeaActivity extends Activity implements ImgListAdapter.OnFooterVie
      */
     private void initContent() {
         refreshUserName();
-//        mStatus = getIntent().getParcelableExtra("status");
+        mStatus = (WeiboResult.WeiboInfo) getIntent().getSerializableExtra("status");
 
-/*        if (mStatus == null) {
+        if (mStatus == null) {
             return;
-        }*/
+        }
 
-        mRepostlayout.setVisibility(View.GONE);
+        mRepostlayout.setVisibility(View.VISIBLE);
         mEditText.setHint("说说分享的心得");
+
+        if(mStatus.isForwarding() && mStatus.getOrginMessage() != null){//转发的内容是转发微博
+            Toast.makeText(this, "未处理转发的微博", Toast.LENGTH_SHORT).show();
+        }else{
+            //转发的内容是原创微博
+            FillContent.FillCenterContent(mStatus, repostImg, repostName, repostContent);
+            String content = mEditText.getText().toString();
+            if (content.trim().isEmpty()) {
+                mEditText.getText().append("转发微博");
+            }
+        }
+        changeSendButtonBg(mEditText.getText().toString().length());
 
      /*   //1. 转发的内容是转发微博
         if (mStatus.retweeted_status != null) {
@@ -146,7 +161,7 @@ public class IdeaActivity extends Activity implements ImgListAdapter.OnFooterVie
     }
 
     private void refreshUserName() {
-
+        mUserName.setText(EsUserManager.getInstance().getUserInfo().getUserName());
     }
 
 

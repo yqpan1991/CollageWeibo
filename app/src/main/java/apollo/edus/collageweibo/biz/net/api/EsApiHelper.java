@@ -1,8 +1,6 @@
 package apollo.edus.collageweibo.biz.net.api;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Handler;
 import android.util.Log;
 
@@ -213,7 +211,7 @@ public class EsApiHelper {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put(EsApiKeys.KEY_PORT, "901");
+                hashMap.put(EsApiKeys.KEY_PORT, "904");
                 hashMap.put(EsApiKeys.KEY_USERID, userId);
                 hashMap.put(EsApiKeys.KEY_WEIBO_ID, weiboId);
                 return hashMap;
@@ -242,7 +240,7 @@ public class EsApiHelper {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put(EsApiKeys.KEY_PORT, "900");
+                hashMap.put(EsApiKeys.KEY_PORT, "903");
                 hashMap.put(EsApiKeys.KEY_USERID, userId);
                 hashMap.put(EsApiKeys.KEY_PAGESIZE, pageSize+"");
                 return hashMap;
@@ -250,5 +248,81 @@ public class EsApiHelper {
         };
         VolleySingleton.addRequest(stringRequest);
     }
+
+    /**
+     * 评论微博
+     * */
+    public static void commentWeibo(final String content, final String weiboId, Response.Listener<String> sucListener, Response.ErrorListener errorListener){
+        final String userId = EsUserManager.getInstance().getUserInfo().getUserId();
+        CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getHost(), sucListener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put(EsApiKeys.KEY_PORT, "906");
+                hashMap.put(EsApiKeys.KEY_USERID, userId);
+                hashMap.put(EsApiKeys.KEY_WEIBO_ID, weiboId);
+                hashMap.put(EsApiKeys.KEY_CONTNETS, content);
+                return hashMap;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
+    }
+
+    /**
+     * 点赞/取消点赞微博
+     * */
+    public static void favoriteWeibo(final boolean isFavorite, final String weiboId, Response.Listener<String> sucListener, Response.ErrorListener errorListener){
+        final String userId = EsUserManager.getInstance().getUserInfo().getUserId();
+        CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getHost(), sucListener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put(EsApiKeys.KEY_PORT, "907");
+                hashMap.put(EsApiKeys.KEY_USERID, userId);
+                hashMap.put(EsApiKeys.KEY_WEIBO_ID, weiboId);
+                hashMap.put(EsApiKeys.KEY_FAVORITE_ACTION, isFavorite ? 1+"": 2+"");
+                return hashMap;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
+    }
+
+
+    public static void getWeiboDetail(final String weiboId, Response.Listener<String> sucListener, Response.ErrorListener errorListener){
+        CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getHost(), sucListener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put(EsApiKeys.KEY_PORT, "908");
+                hashMap.put(EsApiKeys.KEY_WEIBO_ID, weiboId);
+                return hashMap;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
+    }
+
+    /**
+     * 获取个人相关的微博
+     * @param type 1我点评的2我赞的 3@我的
+     * */
+    public static void getRelativeWeibo(final int type, final int pageSize, Response.Listener<String> sucListener, Response.ErrorListener errorListener){
+        final String userId = EsUserManager.getInstance().getUserInfo().getUserId();
+        CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getHost(), sucListener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put(EsApiKeys.KEY_PORT, "909");
+                hashMap.put(EsApiKeys.KEY_USERID, userId);
+                hashMap.put(EsApiKeys.KEY_WEIBO_TYPE, type+"");
+                hashMap.put(EsApiKeys.KEY_PAGESIZE, pageSize+"");
+                return hashMap;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
+    }
+
+
+
+
 
 }

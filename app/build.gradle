@@ -37,6 +37,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.2.1'
     compile files('libs/universal-image-loader-1.9.5.jar')
     compile 'de.hdodenhof:circleimageview:2.0.0'
+    compile 'com.cesards.android:cropimageview:1.0.2.1'
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.0'
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.jakewharton:butterknife:8.0.1'
