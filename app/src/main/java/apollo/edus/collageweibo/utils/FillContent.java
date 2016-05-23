@@ -1,6 +1,10 @@
 package apollo.edus.collageweibo.utils;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.cesards.cropimageview.CropImageView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -27,8 +33,13 @@ import java.util.Random;
 
 import apollo.edus.collageweibo.R;
 import apollo.edus.collageweibo.biz.bean.WeiboResult;
+import apollo.edus.collageweibo.biz.global.EsGlobal;
+import apollo.edus.collageweibo.biz.net.api.EsApiHelper;
+import apollo.edus.collageweibo.biz.user.EsFavoriteTempManager;
+import apollo.edus.collageweibo.biz.user.EsUserManager;
 import apollo.edus.collageweibo.biz.user.EsUserProfile;
 import apollo.edus.collageweibo.ui.activity.IdeaActivity;
+import apollo.edus.collageweibo.ui.activity.LoginActivity;
 import apollo.edus.collageweibo.ui.widget.emojitextview.EmojiTextView;
 
 /**
@@ -137,7 +148,7 @@ public class FillContent {
      * @param redirect
      * @param feedlike
      */
-    public static void fillButtonBar(final Context context, final WeiboResult.WeiboInfo weiboInfo, LinearLayout bottombar_retweet, LinearLayout bottombar_comment, LinearLayout bottombar_attitude, TextView comment, TextView redirect, TextView feedlike) {
+    public static void fillButtonBar(final Context context, final WeiboResult.WeiboInfo weiboInfo, LinearLayout bottombar_retweet, final LinearLayout bottombar_comment, final LinearLayout bottombar_attitude, TextView comment, TextView redirect, final TextView feedlike) {
         comment.setText(weiboInfo.getMreply() + "");
         redirect.setText(weiboInfo.getMcopy() + "");
         feedlike.setText(weiboInfo.getMfay() + "");
@@ -169,8 +180,77 @@ public class FillContent {
                 context.startActivity(intent);
             }
         });
+        if(EsFavoriteTempManager.getInstance().getFavoriteWeiboListSnapShot().contains(weiboInfo.getWeibo_id())){
+            bottombar_attitude.setSelected(true);
+        }else{
+            bottombar_attitude.setSelected(false);
+        }
+        bottombar_attitude.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                if(!preCheckValid(v)){
+                    return;
+                }
+                final ProgressDialog progressDialog = new ProgressDialog(v.getContext());
+                progressDialog.setMessage("处理中...");
+                progressDialog.setCancelable(false);
+                progressDialog.setCanceledOnTouchOutside(false);
+                progressDialog.show();
+                final boolean isFavorite = EsFavoriteTempManager.getInstance().getFavoriteWeiboListSnapShot().contains(weiboInfo.getWeibo_id()) ? false : true;
+                EsApiHelper.favoriteWeibo(isFavorite , weiboInfo.getWeibo_id(), new Response.Listener<String>(){
 
+                    @Override
+                    public void onResponse(String string) {
+                        progressDialog.dismiss();
+                        if(isFavorite){
+                            bottombar_attitude.setSelected(true);
+                            weiboInfo.setMfay(weiboInfo.getMfay()+1);
+                            feedlike.setText(weiboInfo.getMfay() + "");
+                            EsFavoriteTempManager.getInstance().addFavorite(weiboInfo.getWeibo_id());
+                        }else{
+                            bottombar_attitude.setSelected(false);
+                            weiboInfo.setMfay(weiboInfo.getMfay()-1);
+                            EsFavoriteTempManager.getInstance().delFavorite(weiboInfo.getWeibo_id());
+                        }
+                        feedlike.setText(weiboInfo.getMfay() + "");
+                        ToastUtil.showShort(EsGlobal.getGlobalContext(), isFavorite ? "点赞成功" : "取消点赞成功");
+                    }
+                }, new Response.ErrorListener(){
 
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        ToastUtil.showShort(EsGlobal.getGlobalContext(), isFavorite ? "点赞失败" : "取消点赞失败");
+                        progressDialog.dismiss();
+                    }
+                });
+            }
+        });
+    }
+
+    private static boolean preCheckValid(final View v) {
+        if(!EsUserManager.getInstance().hasLogIn()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+            builder.setMessage("此功能需要登录,是否去登录?")
+                    .setCancelable(true)
+                    .setIcon(R.drawable.logo)
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            v.getContext().startActivity(new Intent(v.getContext().getApplicationContext(), LoginActivity.class));
+                            if(v.getContext() instanceof Activity){
+                                ((Activity)v.getContext()).finish();
+                            }
+                        }
+                    })
+                    .setNegativeButton("取消", null);
+            AlertDialog alert = builder.create();
+            alert.show();
+            return false;
+        }
+        if(!NetworkUtils.isNetworkAvailable(v.getContext())){
+            ToastUtil.showShort(v.getContext(), "未连接网络，请稍后重试");
+            return false;
+        }
+        return true;
     }
 
 

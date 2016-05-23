@@ -77,7 +77,7 @@ public class MyWeiboActivity extends Activity implements MyWeiBoActivityView{
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mHeaderAndFooterRecyclerViewAdapter);
-        RecyclerViewUtils.setHeaderView(mRecyclerView, new SeachHeadView(mContext));
+//        RecyclerViewUtils.setHeaderView(mRecyclerView, new SeachHeadView(mContext));
         mRecyclerView.addItemDecoration(new WeiboItemSapce((int) mContext.getResources().getDimension(R.dimen.home_weiboitem_space)));
     }
 

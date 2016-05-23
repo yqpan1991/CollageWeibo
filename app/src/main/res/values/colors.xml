@@ -20,6 +20,7 @@
 
     <!--微博底部Bar-->
     <color name="home_weiboitem_bottombar_font">#929292</color><!--底部Bar颜色-->
+    <color name="home_weiboitem_bottombar_font_selected">#FF0000</color><!--底部Bar选中颜色-->
 
     <!--微博item的其他设置-->
     <color name="home_weiboitem_content_keyword">#507daf</color><!--关键词高亮-->
