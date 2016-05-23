@@ -39,6 +39,7 @@
         <activity android:name=".ui.activity.AlbumActivity" />
         <activity android:name=".ui.activity.IdeaActivity" />
         <activity android:name=".ui.activity.MyWeiboActivity" />
+        <activity android:name=".ui.activity.RelativeWeiboListActivity" />
 
     </application>
 

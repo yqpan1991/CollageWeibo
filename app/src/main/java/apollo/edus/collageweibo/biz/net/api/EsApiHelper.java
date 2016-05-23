@@ -305,8 +305,7 @@ public class EsApiHelper {
      * 获取个人相关的微博
      * @param type 1我点评的2我赞的 3@我的
      * */
-    public static void getRelativeWeibo(final int type, final int pageSize, Response.Listener<String> sucListener, Response.ErrorListener errorListener){
-        final String userId = EsUserManager.getInstance().getUserInfo().getUserId();
+    public static void getRelativeWeibo(final String userId, final int type, final int pageSize, Response.Listener<String> sucListener, Response.ErrorListener errorListener){
         CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getHost(), sucListener, errorListener) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
