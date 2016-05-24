@@ -28,7 +28,7 @@
     </style>
 
     <style name="xListViewLoadingProgressStyle" parent="@android:style/Widget.ProgressBar">
-        <item name="android:indeterminateDrawable">@drawable/dm_xloading_progress</item>
+        <item name="android:indeterminateDrawable">@drawable/es_xloading_progress</item>
         <item name="android:indeterminateDuration">5000</item>
         <item name="android:minWidth">32dip</item>
         <item name="android:maxWidth">32dip</item>
