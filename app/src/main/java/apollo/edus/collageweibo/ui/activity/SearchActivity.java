@@ -3,6 +3,8 @@ package apollo.edus.collageweibo.ui.activity;
 import android.app.Activity;
 import android.os.Bundle;
 
+import apollo.edus.collageweibo.R;
+
 /**
  * Created by panyongqiang on 16/5/24.
  */
@@ -11,6 +13,8 @@ public class SearchActivity extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_search_contact);
+
         //search --> result
         //click show user detail
         //detail show relationShip

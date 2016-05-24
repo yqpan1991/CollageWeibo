@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <apollo.edus.collageweibo.ui.widget.EsSearchContactEditText
+        android:id="@+id/edit_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true" />
+
+    <TextView
+        android:id="@+id/tv_my_zapya_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@color/search_contact_input_bg_color"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingBottom="7dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="7dp"
+        android:singleLine="true"
+        android:text="我的快牙号/昵称：11056/se"
+        android:textColor="@color/color_black_alpha_54"
+        android:textSize="@dimen/text_size_33" />
+
+</LinearLayout>

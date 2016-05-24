@@ -43,5 +43,14 @@
 
     <color name="btn_login_login">#6094ff</color>
 
+    <color name="search_contact_input_bg_color">#f7f7f7</color>
+
+    <color name="freewifi_normal_color">#14c2c8</color>
+    <color name="gray_e5e5e5">#ffe5e5e5</color>
+    <color name="gray_f9f9f9">#fff9f9f9</color>
+    <color name="gray_999999">#ff999999</color>
+    <color name="transparent">#00000000</color>
+    <color name="progress_background">#19cccccc</color>
+
 
 </resources>

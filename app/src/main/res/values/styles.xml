@@ -27,4 +27,24 @@
         <item name="android:maxHeight">32dip</item>
     </style>
 
+    <style name="xListViewLoadingProgressStyle" parent="@android:style/Widget.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/dm_xloading_progress</item>
+        <item name="android:indeterminateDuration">5000</item>
+        <item name="android:minWidth">32dip</item>
+        <item name="android:maxWidth">32dip</item>
+        <item name="android:minHeight">32dip</item>
+        <item name="android:maxHeight">32dip</item>
+    </style>
+
+    <style name="dm_listview">
+        <item name="android:overScrollFooter">@null</item>
+        <item name="android:scrollbarThumbVertical">@drawable/list_thumb_custom</item>
+        <item name="android:fastScrollEnabled">false</item>
+    </style>
+
+    <style name="LoadingProgressStylel" parent="@android:style/Widget.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/loading_progress</item>
+        <item name="android:indeterminateDuration">1000</item>
+    </style>
+
 </resources>

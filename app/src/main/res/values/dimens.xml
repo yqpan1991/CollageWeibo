@@ -58,5 +58,7 @@
     <dimen name="sp_14">14sp</dimen>
     <dimen name="sp_16">16sp</dimen>
 
+    <dimen name="dm_xlistview_foot_height">52dp</dimen>
+
 
 </resources>

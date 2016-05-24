@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/search_contact_head"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/fragment_search_contact_head_layout" />
+
+    <FrameLayout
+        android:id="@+id/fl_userlist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/tv_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingTop="150dp"
+            android:textColor="@color/color_black_alpha_70"
+            android:textSize="@dimen/text_size_39"
+            android:visibility="gone" >
+        </TextView>
+
+        <include
+            android:id="@+id/rl_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            layout="@layout/loading_layout"
+            android:visibility="visible" />
+
+        <apollo.edus.collageweibo.ui.widget.XListView
+            android:id="@+id/abslistid"
+            style="@style/dm_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:cacheColorHint="#00000000"
+            android:divider="@null"
+            android:drawSelectorOnTop="false"
+            android:fadingEdgeLength="0dp"
+            android:footerDividersEnabled="false"
+            android:listSelector="@drawable/easemod_search_contact_list_selector"
+            android:scrollbars="vertical"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</LinearLayout>

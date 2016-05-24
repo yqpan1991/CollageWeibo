@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- freewifi -->
+    <string name="xlistview_header_hint_normal">下拉更新</string>
+    <string name="xlistview_header_hint_ready">釋放更新</string>
+    <string name="xlistview_header_hint_loading">正在更新名單</string>
+    <string name="xlistview_header_last_time">上次更新時間：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">鬆開載入更多</string>
+    <string name="dm_progress_loading">加载中...</string>
+   
+</resources>
