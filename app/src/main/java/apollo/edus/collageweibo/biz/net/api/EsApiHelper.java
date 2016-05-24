@@ -313,5 +313,36 @@ public class EsApiHelper {
         VolleySingleton.addRequest(stringRequest);
     }
 
+    /**
+     * 关注/取消关注
+     */
+    public static void followUser(final String userId, final boolean follow, final String inUserId, final int pageSize, Response.Listener<String> sucListener, Response.ErrorListener errorListener) {
+        int action = follow ? 1 : 2;
+        //?por=%s&userid=%s&action=%s&in_userid=%s
+        CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.GET, EsApi.getFullUrl(EsApi.FOLLOW_URL, "100", userId, action + "", inUserId), sucListener, errorListener);
+        stringRequest.setShouldCache(false);
+        VolleySingleton.addRequest(stringRequest);
+    }
+
+    /**
+     * 我的关注/我的粉丝用户
+     */
+    public static void getMyRelativeUserList(final String userId, int type, int pageSize, Response.Listener<String> sucListener, Response.ErrorListener errorListener) {
+        //?por=%s&userid=%s&type=%s
+        //TODO -------- 缺少pageSize
+        CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.GET, EsApi.getFullUrl(EsApi.MY_RELATIVE_USER_URL, "101", userId, type+""), sucListener, errorListener);
+        stringRequest.setShouldCache(false);
+        VolleySingleton.addRequest(stringRequest);
+    }
+
+    public static void getHomePage(){
+        //TODO -------
+    }
+
+    public static void updateUserLocation(){
+        //TODO ------
+    }
+
+
 
 }

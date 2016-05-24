@@ -21,7 +21,7 @@ public interface UserModel {
 
 
     interface OnUserListRequestFinish {
-        void noMoreDate();
+        void noMoreData();
 
         void onDataFinish(ArrayList<EsUserProfile> userlist);
 

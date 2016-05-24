@@ -16,6 +16,8 @@ public class EsApi {
     }
 
     public final static String RELATIVE_URL = "?por=%s&userid=%s&type=%s&pageSize=%s";
+    public final static String FOLLOW_URL = "?por=%s&userid=%s&action=%s&in_userid=%s";
+    public final static String MY_RELATIVE_USER_URL = "?por=%s&userid=%s&type=%s";
 
     public static String getFullUrl(String url){
         return HOST + url;

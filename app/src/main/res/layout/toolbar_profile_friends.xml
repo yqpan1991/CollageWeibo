@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/toolbar_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:onClick="onArrorClick"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        android:src="@drawable/navigationbar_back_auto" />
+
+    <LinearLayout
+        android:id="@+id/folder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/compose_toolbar_foldername_auto"
+        android:clickable="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/foldername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部关注"
+            android:textColor="#545454"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/folder_arrow"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:layout_marginLeft="5dp"
+            android:visibility="gone"
+            android:src="@drawable/navigationbar_arrow_down" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/getData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        android:visibility="gone"
+        android:src="@drawable/navigationbar_timeorder_auto" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="#e3e3e3" />
+</RelativeLayout>

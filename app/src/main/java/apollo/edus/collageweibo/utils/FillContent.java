@@ -89,8 +89,8 @@ public class FillContent {
      */
     public static void fillProfileImg(final Context context, final EsUserProfile user, final ImageView profile_img, final ImageView profile_verified) {
 
-        profile_verified.setVisibility(View.GONE);
-        profile_verified.setVisibility(View.VISIBLE);
+//        profile_verified.setVisibility(View.GONE);
+//        profile_verified.setVisibility(View.VISIBLE);
         if(user == null){
             ImageLoader.getInstance().displayImage("", profile_img, mAvatorOptions);
         }else{
@@ -590,19 +590,21 @@ public class FillContent {
         }
     }*/
 
-/*    public static void fillFriendContent(Context context, User user, ImageView friendImg, ImageView friendVerified, ImageView followme, TextView friendName, TextView friendContent) {
-        FillContent.fillProfileImg(context, user, friendImg, friendVerified);
-        if (user.follow_me) {
+    public static void fillFriendContent(Context context, EsUserProfile profile, ImageView friendImg, ImageView friendVerified, ImageView followme, TextView friendName, TextView friendContent) {
+        FillContent.fillProfileImg(context, profile, friendImg, friendVerified);
+/*        if (followMe) {
             followme.setVisibility(View.VISIBLE);
         } else {
             followme.setVisibility(View.INVISIBLE);
-        }
+        }*/
 
-        friendName.setText(user.name);
-        if (user.status != null) {//有些人不发微博
-            friendContent.setText(user.status.text);
+        friendName.setText(profile.getDisplayName());
+        if (profile.getUserSgin() != null) {
+            friendContent.setText(profile.getUserSgin());
+        }else{
+            friendContent.setText("");
         }
-    }*/
+    }
 
 /*
     public static void fillUserHeadView(Context context, final User user, final ImageView userCoverimg, ImageView userImg, ImageView userVerified, TextView userName,

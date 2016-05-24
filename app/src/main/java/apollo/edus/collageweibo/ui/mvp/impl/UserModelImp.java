@@ -1,7 +1,6 @@
 package apollo.edus.collageweibo.ui.mvp.impl;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.volley.Response;
@@ -11,9 +10,9 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+import apollo.edus.collageweibo.biz.bean.UserResult;
 import apollo.edus.collageweibo.biz.bean.WeiboResult;
 import apollo.edus.collageweibo.biz.net.api.EsApiHelper;
-import apollo.edus.collageweibo.biz.user.EsUser;
 import apollo.edus.collageweibo.biz.user.EsUserProfile;
 import apollo.edus.collageweibo.ui.mvp.model.UserModel;
 import apollo.edus.collageweibo.utils.ToastUtil;
@@ -29,7 +28,8 @@ public class UserModelImp implements UserModel {
     private int mFollowersCursor;
     private int mFriendsCursor;
     private ArrayList<EsUserProfile> mUserArrayList;
-    private int currentPageIndex;
+    private int currentTimelineIndex;
+    private int currentFollowersIndex;
 
     @Override
     public void showUserDetail(String uid, final Context context, final OnUserDetailRequestFinish onUserRequestFinish) {
@@ -67,7 +67,7 @@ public class UserModelImp implements UserModel {
                 //add to result
                 //check no more data
                 //check result
-                currentPageIndex = 0;
+                currentTimelineIndex = 0;
                 mStatusList.clear();
                 Gson gson = new Gson();
                 Log.e(TAG,"userTimeline result:"+s);
@@ -92,8 +92,8 @@ public class UserModelImp implements UserModel {
 
     @Override
     public void userTimelineNextPage(final String uid, final Context context, final OnStatusListFinishedListener onStatusFinishedListener) {
-        currentPageIndex ++;
-        EsApiHelper.fetchUserWeiboList(uid, currentPageIndex, new Response.Listener<String>() {
+        currentTimelineIndex++;
+        EsApiHelper.fetchUserWeiboList(uid, currentTimelineIndex, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 //reset index ++;
@@ -114,8 +114,8 @@ public class UserModelImp implements UserModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                if(currentPageIndex >= 0){
-                    currentPageIndex --;
+                if(currentTimelineIndex > 0){
+                    currentTimelineIndex--;
                 }
                 ToastUtil.showShort(context, volleyError.toString());
                 onStatusFinishedListener.onError(volleyError.toString());
@@ -125,6 +125,7 @@ public class UserModelImp implements UserModel {
 
     @Override
     public void followers(final String uid, final Context context, final OnUserListRequestFinish onUserListRequestFinish) {
+
 /*
         FriendshipsAPI mFriendshipsAPI = new FriendshipsAPI(context, Constants.APP_KEY, AccessTokenKeeper.readAccessToken(context));
 
@@ -185,32 +186,35 @@ public class UserModelImp implements UserModel {
 
     @Override
     public void friends(final String uid, final Context context, final OnUserListRequestFinish onUserListRequestFinish) {
-       /* FriendshipsAPI mFriendshipsAPI = new FriendshipsAPI(context, Constants.APP_KEY, AccessTokenKeeper.readAccessToken(context));
-
-        mFriendshipsAPI.friends(uid, 30, 0, false, new RequestListener() {
+        EsApiHelper.getMyRelativeUserList(uid, 1,0, new Response.Listener<String>() {
             @Override
-            public void onComplete(String response) {
-                ArrayList<User> temp = UserList.parse(response).usersList;
-
-                if (temp != null && temp.size() > 0) {
-                    if (mFriendsList != null) {
-                        mFriendsList.clear();
-                    }
-                    mFriendsList = temp;
-                    mFriendsCursor = Integer.valueOf(StatusList.parse(response).next_cursor);
-                    onUserListRequestFinish.onDataFinish(mFriendsList);
-                } else {
-                    ToastUtil.showShort(context, "没有更新的内容了");
+            public void onResponse(String s) {
+                //reset index = 0;
+                //clear result
+                //add to result
+                //check no more data
+                //check result
+                currentTimelineIndex = 0;
+                mFriendsList.clear();
+                Gson gson = new Gson();
+                Log.e(TAG,"getMyRelativeUserList result:"+s);
+                UserResult userResult = gson.fromJson(s, UserResult.class);
+                List<EsUserProfile> userProfileList = userResult.getList();
+                if(!userResult.hasNextPage() || userProfileList == null || userProfileList.isEmpty()){
                     onUserListRequestFinish.noMoreData();
                 }
+                if(userProfileList != null && !userProfileList.isEmpty()){
+                    mFriendsList.addAll(userProfileList);
+                    onUserListRequestFinish.onDataFinish(mFriendsList);
+                }
             }
-
+        }, new Response.ErrorListener() {
             @Override
-            public void onWeiboException(WeiboException e) {
-                ToastUtil.showShort(context, e.getMessage());
-                onUserListRequestFinish.onError(e.getMessage());
+            public void onErrorResponse(VolleyError volleyError) {
+                ToastUtil.showShort(context, volleyError.toString());
+                onUserListRequestFinish.onError(volleyError.toString());
             }
-        });*/
+        });
     }
 
     /**
@@ -222,32 +226,35 @@ public class UserModelImp implements UserModel {
      */
     @Override
     public void friendsNextPage(final String uid, final Context context, final OnUserListRequestFinish onUserListRequestFinish) {
-        /*FriendshipsAPI mFriendshipsAPI = new FriendshipsAPI(context, Constants.APP_KEY, AccessTokenKeeper.readAccessToken(context));
-        mFriendshipsAPI.friends(uid, 20, mFriendsCursor, false, new RequestListener() {
+        currentTimelineIndex ++;
+        EsApiHelper.getMyRelativeUserList(uid, 1, currentTimelineIndex, new Response.Listener<String>() {
             @Override
-            public void onComplete(String response) {
-                if (!TextUtils.isEmpty(response)) {
-                    ArrayList<User> temp = UserList.parse(response).usersList;
-                    if (temp.size() == 0 || (temp != null && temp.size() == 1 && temp.get(0).id.equals(mFriendsList.get(mFriendsList.size() - 1).id))) {
-                        onUserListRequestFinish.noMoreData();
-                    } else if (temp.size() > 1) {
-                        temp.remove(0);
-                        mFriendsList.addAll(temp);
-                        mFriendsCursor = Integer.valueOf(UserList.parse(response).next_cursor);
-                        onUserListRequestFinish.onDataFinish(mFriendsList);
-                    }
-                } else {
-                    ToastUtil.showShort(context, "内容已经加载完了");
+            public void onResponse(String s) {
+                //add to result
+                //check no more data
+                //check result
+                Gson gson = new Gson();
+                Log.e(TAG,"getMyRelativeUserList result:"+s);
+                UserResult userResult = gson.fromJson(s, UserResult.class);
+                List<EsUserProfile> userProfileList = userResult.getList();
+                if(!userResult.hasNextPage() || userProfileList == null || userProfileList.isEmpty()){
                     onUserListRequestFinish.noMoreData();
                 }
+                if(userProfileList != null && !userProfileList.isEmpty()){
+                    mFriendsList.addAll(userProfileList);
+                    onUserListRequestFinish.onDataFinish(mFriendsList);
+                }
             }
-
+        }, new Response.ErrorListener() {
             @Override
-            public void onWeiboException(WeiboException e) {
-                ToastUtil.showShort(context, e.getMessage());
-                onUserListRequestFinish.onError(e.getMessage());
+            public void onErrorResponse(VolleyError volleyError) {
+                if(currentTimelineIndex > 0){
+                    currentTimelineIndex--;
+                }
+                ToastUtil.showShort(context, volleyError.toString());
+                onUserListRequestFinish.onError(volleyError.toString());
             }
-        });*/
+        });
     }
 
     @Override
