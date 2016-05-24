@@ -91,8 +91,11 @@ public class FillContent {
 
         profile_verified.setVisibility(View.GONE);
         profile_verified.setVisibility(View.VISIBLE);
-        ImageLoader.getInstance().displayImage(user.getAvatorUrl(), profile_img, mAvatorOptions);
-
+        if(user == null){
+            ImageLoader.getInstance().displayImage("", profile_img, mAvatorOptions);
+        }else{
+            ImageLoader.getInstance().displayImage(user.getAvatorUrl(), profile_img, mAvatorOptions);
+        }
         profile_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,8 +119,12 @@ public class FillContent {
      * @param weibo_comefrom
      */
     public static void fillTitleBar(Context context, WeiboResult.WeiboInfo weiboInfo, ImageView profile_img, ImageView profile_verified, TextView profile_name, TextView profile_time, TextView weibo_comefrom) {
-        fillProfileImg(context, weiboInfo.getUserinfo(), profile_img, profile_verified);
-        profile_name.setText(weiboInfo.getUserinfo().getDisplayName());
+        fillProfileImg(context, weiboInfo.getUserInfo(), profile_img, profile_verified);
+        if(weiboInfo.getUserInfo() == null){
+            profile_name.setText("");
+        }else{
+            profile_name.setText(weiboInfo.getUserInfo().getDisplayName());
+        }
         setWeiBoTime(profile_time, weiboInfo.getCreateTime());
 //        setWeiBoTime(profile_time, status.created_at);
 //        setWeiBoComeFrom(weibo_comefrom, status.source);

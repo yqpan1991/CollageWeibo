@@ -68,7 +68,7 @@ public class WeiboResult {
         private List<CommentInfo> commentInfoList;
 
         @SerializedName("userinfo")
-        private EsUserProfile userinfo;
+        private EsUserProfile userInfo;
 
         public String getWeiboId() {
             return weiboId;
@@ -166,12 +166,12 @@ public class WeiboResult {
             this.commentInfoList = commentInfoList;
         }
 
-        public EsUserProfile getUserinfo() {
-            return userinfo;
+        public EsUserProfile getUserInfo() {
+            return userInfo;
         }
 
-        public void setUserinfo(EsUserProfile userinfo) {
-            this.userinfo = userinfo;
+        public void setUserInfo(EsUserProfile userInfo) {
+            this.userInfo = userInfo;
         }
 
         @Override
