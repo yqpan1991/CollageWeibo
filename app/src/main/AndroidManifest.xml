@@ -42,6 +42,7 @@
         <activity android:name=".ui.activity.RelativeWeiboListActivity" />
         <activity android:name=".ui.activity.FriendsActivity" />
         <activity android:name=".ui.activity.FollowersActivity" />
+        <activity android:name=".ui.activity.SearchActivity" />
 
     </application>
 

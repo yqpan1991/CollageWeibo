@@ -4,32 +4,22 @@
     android:layout_height="45dp"
     android:background="@color/white">
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:layout_centerVertical="true"
+    <TextView
+        android:id="@+id/tv_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
         android:background="@drawable/rect_gray"
-        android:searchIcon="@drawable/searchbar_second_textfield_search_icon" />
-
-    <ImageView
-        android:id="@+id/getData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="8dp"
-        android:src="@drawable/navigationbar_search_voice_auto" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:background="#e3e3e3" />
+        android:enabled="true"
+        android:gravity="center_vertical"
+        android:minHeight="30dp"
+        android:text="微博/联系人"
+        android:textColor="@color/color_black_alpha_50"
+        android:textSize="@dimen/text_size_45" />
 
 
 </RelativeLayout>
