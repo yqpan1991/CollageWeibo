@@ -190,7 +190,7 @@ public class WeiboResult {
 
 
 
-        public static class CommentInfo{
+        public static class CommentInfo implements Serializable{
             @SerializedName("userId")
             private String userId;
             @SerializedName("nickName")
