@@ -27,6 +27,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    signingConfigs{
+        debug{
+//            storeFile file(rootDir.absolutePath+"/config/debug.keystore")
+        }
+    }
+}
+
+task showConfigProperty{
+    println("just show debug_key_store_path:"+rootDir.absolutePath)
 }
 
 dependencies {
