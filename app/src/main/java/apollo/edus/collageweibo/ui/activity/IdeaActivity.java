@@ -129,7 +129,7 @@ public class IdeaActivity extends Activity implements ImgListAdapter.OnFooterVie
         mRepostlayout.setVisibility(View.VISIBLE);
         mEditText.setHint("说说分享的心得");
 
-        if(mStatus.isForwarding() && mStatus.getOrginMessage() != null){//转发的内容是转发微博
+        if(mStatus.getForwarding() && mStatus.getOrginMessage() != null){//转发的内容是转发微博
             Toast.makeText(this, "未处理转发的微博", Toast.LENGTH_SHORT).show();
         }else{
             //转发的内容是原创微博

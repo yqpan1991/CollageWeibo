@@ -2,6 +2,7 @@ package apollo.edus.collageweibo.ui.mvp.impl;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -21,6 +22,7 @@ import apollo.edus.collageweibo.utils.ToastUtil;
  * Created by wenmingvs on 16/5/14.
  */
 public class UserModelImp implements UserModel {
+    private final String TAG = this.getClass().getSimpleName();
     private ArrayList<WeiboResult.WeiboInfo> mStatusList = new ArrayList<>();
     private ArrayList<EsUserProfile> mFollowersList = new ArrayList<>();
     private ArrayList<EsUserProfile> mFriendsList = new ArrayList<>();
@@ -68,6 +70,7 @@ public class UserModelImp implements UserModel {
                 currentPageIndex = 0;
                 mStatusList.clear();
                 Gson gson = new Gson();
+                Log.e(TAG,"userTimeline result:"+s);
                 WeiboResult weiboResult = gson.fromJson(s, WeiboResult.class);
                 List<WeiboResult.WeiboInfo> weiboResultList = weiboResult.getList();
                 if(!weiboResult.hasNextPage() || weiboResultList == null || weiboResultList.isEmpty()){

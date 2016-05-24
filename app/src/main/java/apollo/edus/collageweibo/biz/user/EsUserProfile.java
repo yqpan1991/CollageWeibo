@@ -155,4 +155,12 @@ public class EsUserProfile {
     public void setAttention(long attention) {
         this.attention = attention;
     }
+
+    public String getDisplayName(){
+        if(TextUtils.isEmpty(nickName)){
+            return userName;
+        }else{
+            return nickName;
+        }
+    }
 }

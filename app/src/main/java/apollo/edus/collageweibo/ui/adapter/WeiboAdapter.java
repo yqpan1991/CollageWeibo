@@ -1,7 +1,6 @@
 package apollo.edus.collageweibo.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
@@ -107,7 +106,7 @@ public class WeiboAdapter extends RecyclerView.Adapter<ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (mDatas.get(position).isForwarding()  && mDatas.get(position).getOrginMessage() != null) {
+        if (mDatas.get(position).getForwarding()  && mDatas.get(position).getOrginMessage() != null) {
             return TYPE_RETWEET_ITEM;
         } else {
             return TYPE_ORINGIN_ITEM;

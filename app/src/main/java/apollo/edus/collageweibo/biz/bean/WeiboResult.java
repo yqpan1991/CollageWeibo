@@ -1,11 +1,11 @@
 package apollo.edus.collageweibo.biz.bean;
 
-import android.text.TextUtils;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
+
+import apollo.edus.collageweibo.biz.user.EsUserProfile;
 
 /**
  * Created by panyongqiang on 16/5/23.
@@ -13,20 +13,20 @@ import java.util.List;
 public class WeiboResult {
 
     @SerializedName("hasNextPage")
-    private int hasNextPage;
+    private boolean hasNextPage;
 
     @SerializedName("list")
     private List<WeiboInfo> list;
 
-    public int getHasNextPage() {
+    public boolean getHasNextPage() {
         return hasNextPage;
     }
 
     public  boolean hasNextPage(){
-        return hasNextPage == 1;
+        return hasNextPage;
     }
 
-    public void setHasNextPage(int hasNextPage) {
+    public void setHasNextPage(boolean hasNextPage) {
         this.hasNextPage = hasNextPage;
     }
 
@@ -40,15 +40,15 @@ public class WeiboResult {
 
     public static class WeiboInfo implements Serializable{
         @SerializedName("weibo_id")
-        private String weibo_id;
+        private String weiboId;
         @SerializedName("userid")
         private String userid;
-//        @SerializedName("create_time")
-//        private long create_time;
+        @SerializedName("create_time")
+        private long createTime;
         @SerializedName("nickname")
         private String nickname;
         @SerializedName("is_forwarding")
-        private String is_forwarding;
+        private boolean isForwarding;
         @SerializedName("content")
         private String content;
         @SerializedName("mfay")
@@ -67,12 +67,15 @@ public class WeiboResult {
         @SerializedName("comments")
         private List<CommentInfo> commentInfoList;
 
-        public String getWeibo_id() {
-            return weibo_id;
+        @SerializedName("userinfo")
+        private EsUserProfile userinfo;
+
+        public String getWeiboId() {
+            return weiboId;
         }
 
-        public void setWeibo_id(String weibo_id) {
-            this.weibo_id = weibo_id;
+        public void setWeiboId(String weiboId) {
+            this.weiboId = weiboId;
         }
 
         public String getUserid() {
@@ -83,13 +86,13 @@ public class WeiboResult {
             this.userid = userid;
         }
 
-/*        public long getCreate_time() {
-            return create_time;
-        }*/
+        public long getCreateTime() {
+            return createTime;
+        }
 
-/*        public void setCreate_time(long create_time) {
-            this.create_time = create_time;
-        }*/
+        public void setCreateTime(long createTime) {
+            this.createTime = createTime;
+        }
 
         public String getNickname() {
             return nickname;
@@ -99,16 +102,12 @@ public class WeiboResult {
             this.nickname = nickname;
         }
 
-        public String getIs_forwarding() {
-            return is_forwarding;
+        public boolean getForwarding() {
+            return isForwarding;
         }
 
-        public void setIs_forwarding(String is_forwarding) {
-            this.is_forwarding = is_forwarding;
-        }
-
-        public boolean isForwarding(){
-            return TextUtils.isEmpty(is_forwarding) && "2".equals(is_forwarding);
+        public void setForwarding(boolean forwarding) {
+            this.isForwarding = forwarding;
         }
 
         public String getContent() {
@@ -167,19 +166,29 @@ public class WeiboResult {
             this.commentInfoList = commentInfoList;
         }
 
+        public EsUserProfile getUserinfo() {
+            return userinfo;
+        }
+
+        public void setUserinfo(EsUserProfile userinfo) {
+            this.userinfo = userinfo;
+        }
+
         @Override
         public int hashCode() {
-            return weibo_id.hashCode();
+            return weiboId.hashCode();
         }
 
         @Override
         public boolean equals(Object o) {
             if(o instanceof WeiboInfo){
                 WeiboInfo compare = (WeiboInfo) o;
-                return compare.weibo_id.equals(weibo_id);
+                return compare.weiboId.equals(weiboId);
             }
             return false;
         }
+
+
 
         public static class CommentInfo{
             @SerializedName("userId")

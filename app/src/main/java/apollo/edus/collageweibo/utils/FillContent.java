@@ -116,17 +116,23 @@ public class FillContent {
      * @param weibo_comefrom
      */
     public static void fillTitleBar(Context context, WeiboResult.WeiboInfo weiboInfo, ImageView profile_img, ImageView profile_verified, TextView profile_name, TextView profile_time, TextView weibo_comefrom) {
-//        fillProfileImg(context, status.user, profile_img, profile_verified);
-//        profile_name.setText(status.user.name);
+        fillProfileImg(context, weiboInfo.getUserinfo(), profile_img, profile_verified);
+        profile_name.setText(weiboInfo.getUserinfo().getDisplayName());
+        setWeiBoTime(profile_time, weiboInfo.getCreateTime());
 //        setWeiBoTime(profile_time, status.created_at);
 //        setWeiBoComeFrom(weibo_comefrom, status.source);
     }
 
-    public static void setWeiBoTime(TextView textView, String created_at) {
+/*    public static void setWeiBoTime(TextView textView, String created_at) {
         Date data = DateUtils.parseDate(created_at, DateUtils.WeiBo_ITEM_DATE_FORMAT);
         SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm");
         String time = df.format(data);
         textView.setText(time + "   ");
+    }*/
+
+    public static void setWeiBoTime(TextView textView, long created_at) {
+        SimpleDateFormat df = new SimpleDateFormat("MM-dd HH:mm");
+        textView.setText(df.format(new Date(created_at)) + "   ");
     }
 
     public static void setWeiBoComeFrom(TextView textView, String content) {
@@ -180,7 +186,7 @@ public class FillContent {
                 context.startActivity(intent);
             }
         });
-        if(EsFavoriteTempManager.getInstance().getFavoriteWeiboListSnapShot().contains(weiboInfo.getWeibo_id())){
+        if(EsFavoriteTempManager.getInstance().getFavoriteWeiboListSnapShot().contains(weiboInfo.getWeiboId())){
             bottombar_attitude.setSelected(true);
         }else{
             bottombar_attitude.setSelected(false);
@@ -196,8 +202,8 @@ public class FillContent {
                 progressDialog.setCancelable(false);
                 progressDialog.setCanceledOnTouchOutside(false);
                 progressDialog.show();
-                final boolean isFavorite = EsFavoriteTempManager.getInstance().getFavoriteWeiboListSnapShot().contains(weiboInfo.getWeibo_id()) ? false : true;
-                EsApiHelper.favoriteWeibo(isFavorite , weiboInfo.getWeibo_id(), new Response.Listener<String>(){
+                final boolean isFavorite = EsFavoriteTempManager.getInstance().getFavoriteWeiboListSnapShot().contains(weiboInfo.getWeiboId()) ? false : true;
+                EsApiHelper.favoriteWeibo(isFavorite , weiboInfo.getWeiboId(), new Response.Listener<String>(){
 
                     @Override
                     public void onResponse(String string) {
@@ -206,11 +212,11 @@ public class FillContent {
                             bottombar_attitude.setSelected(true);
                             weiboInfo.setMfay(weiboInfo.getMfay()+1);
                             feedlike.setText(weiboInfo.getMfay() + "");
-                            EsFavoriteTempManager.getInstance().addFavorite(weiboInfo.getWeibo_id());
+                            EsFavoriteTempManager.getInstance().addFavorite(weiboInfo.getWeiboId());
                         }else{
                             bottombar_attitude.setSelected(false);
                             weiboInfo.setMfay(weiboInfo.getMfay()-1);
-                            EsFavoriteTempManager.getInstance().delFavorite(weiboInfo.getWeibo_id());
+                            EsFavoriteTempManager.getInstance().delFavorite(weiboInfo.getWeiboId());
                         }
                         feedlike.setText(weiboInfo.getMfay() + "");
                         ToastUtil.showShort(EsGlobal.getGlobalContext(), isFavorite ? "点赞成功" : "取消点赞成功");
