@@ -16,6 +16,7 @@ import android.widget.TextView;
 import apollo.edus.collageweibo.R;
 import apollo.edus.collageweibo.biz.user.EsUserManager;
 import apollo.edus.collageweibo.biz.user.EsUserProfile;
+import apollo.edus.collageweibo.ui.activity.FollowersActivity;
 import apollo.edus.collageweibo.ui.activity.FriendsActivity;
 import apollo.edus.collageweibo.ui.activity.LoginActivity;
 import apollo.edus.collageweibo.ui.activity.MyProfileDetailActivity;
@@ -156,18 +157,26 @@ public class ProfileFragment extends EsBaseFragment implements EsUserManager.OnU
         mRlNewFriend = (RelativeLayout) rootView.findViewById(R.id.rl_new_friend);
         mRlSettings = (RelativeLayout) rootView.findViewById(R.id.rl_settings);
 
-        mLlFriendsCount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), FriendsActivity.class));
-            }
-        });
         mLlWebibo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkStartWeiboActivity();
             }
         });
+        mLlFriendsCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), FriendsActivity.class));
+            }
+        });
+
+        mLlFollowers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), FollowersActivity.class));
+            }
+        });
+
         mRlMyProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

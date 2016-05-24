@@ -41,6 +41,7 @@
         <activity android:name=".ui.activity.MyWeiboActivity" />
         <activity android:name=".ui.activity.RelativeWeiboListActivity" />
         <activity android:name=".ui.activity.FriendsActivity" />
+        <activity android:name=".ui.activity.FollowersActivity" />
 
     </application>
 

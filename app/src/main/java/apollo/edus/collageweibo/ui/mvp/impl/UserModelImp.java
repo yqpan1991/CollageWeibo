@@ -29,6 +29,7 @@ public class UserModelImp implements UserModel {
     private int mFriendsCursor;
     private ArrayList<EsUserProfile> mUserArrayList;
     private int currentTimelineIndex;
+    private int currentFriendsIndex;
     private int currentFollowersIndex;
 
     @Override
@@ -125,63 +126,68 @@ public class UserModelImp implements UserModel {
 
     @Override
     public void followers(final String uid, final Context context, final OnUserListRequestFinish onUserListRequestFinish) {
-
-/*
-        FriendshipsAPI mFriendshipsAPI = new FriendshipsAPI(context, Constants.APP_KEY, AccessTokenKeeper.readAccessToken(context));
-
-        mFriendshipsAPI.followers(uid, 30, 0, false, new RequestListener() {
+        EsApiHelper.getMyRelativeUserList(uid, 2, 0, new Response.Listener<String>() {
             @Override
-            public void onComplete(String response) {
-                ArrayList<User> temp = UserList.parse(response).usersList;
-                if (temp != null && temp.size() > 0) {
-                    if (mFollowersList != null) {
-                        mFollowersList.clear();
-                    }
-                    mFollowersList = temp;
-                    mFollowersCursor = Integer.valueOf(StatusList.parse(response).next_cursor);
-                    onUserListRequestFinish.onDataFinish(mFollowersList);
-                } else {
-                    ToastUtil.showShort(context, "没有更新的内容了");
+            public void onResponse(String s) {
+                //reset index = 0;
+                //clear result
+                //add to result
+                //check no more data
+                //check result
+                currentFollowersIndex = 0;
+                mFollowersList.clear();
+                Gson gson = new Gson();
+                Log.e(TAG,"getMyRelativeUserList result:"+s);
+                UserResult userResult = gson.fromJson(s, UserResult.class);
+                List<EsUserProfile> userProfileList = userResult.getList();
+                if(!userResult.hasNextPage() || userProfileList == null || userProfileList.isEmpty()){
                     onUserListRequestFinish.noMoreData();
                 }
+                if(userProfileList != null && !userProfileList.isEmpty()){
+                    mFollowersList.addAll(userProfileList);
+                    onUserListRequestFinish.onDataFinish(mFollowersList);
+                }
             }
-
+        }, new Response.ErrorListener() {
             @Override
-            public void onWeiboException(WeiboException e) {
-                ToastUtil.showShort(context, e.getMessage());
-                onUserListRequestFinish.onError(e.getMessage());
+            public void onErrorResponse(VolleyError volleyError) {
+                ToastUtil.showShort(context, volleyError.toString());
+                onUserListRequestFinish.onError(volleyError.toString());
             }
-        });*/
+        });
     }
 
     @Override
     public void followersNextPage(final String uid, final Context context, final OnUserListRequestFinish onUserListRequestFinish) {
-        /*FriendshipsAPI mFriendshipsAPI = new FriendshipsAPI(context, Constants.APP_KEY, AccessTokenKeeper.readAccessToken(context));
-        mFriendshipsAPI.followers(uid, 20, mFollowersCursor, false, new RequestListener() {
+        currentFollowersIndex ++;
+        EsApiHelper.getMyRelativeUserList(uid, 2, currentFollowersIndex, new Response.Listener<String>() {
             @Override
-            public void onComplete(String response) {
-                if (!TextUtils.isEmpty(response)) {
-                    ArrayList<User> temp = UserList.parse(response).usersList;
-                    if (temp.size() == 0 || (temp != null && temp.size() == 1 && temp.get(0).id.equals(mFollowersList.get(mFollowersList.size() - 1).id))) {
-                        onUserListRequestFinish.noMoreData();
-                    } else if (temp.size() > 1) {
-                        temp.remove(0);
-                        mFollowersList.addAll(temp);
-                        mFollowersCursor = Integer.valueOf(UserList.parse(response).next_cursor);
-                        onUserListRequestFinish.onDataFinish(mFollowersList);
-                    }
-                } else {
-                    ToastUtil.showShort(context, "内容已经加载完了");
+            public void onResponse(String s) {
+                //add to result
+                //check no more data
+                //check result
+                Gson gson = new Gson();
+                Log.e(TAG,"getMyRelativeUserList result:"+s);
+                UserResult userResult = gson.fromJson(s, UserResult.class);
+                List<EsUserProfile> userProfileList = userResult.getList();
+                if(!userResult.hasNextPage() || userProfileList == null || userProfileList.isEmpty()){
                     onUserListRequestFinish.noMoreData();
                 }
+                if(userProfileList != null && !userProfileList.isEmpty()){
+                    mFollowersList.addAll(userProfileList);
+                    onUserListRequestFinish.onDataFinish(mFollowersList);
+                }
             }
-
+        }, new Response.ErrorListener() {
             @Override
-            public void onWeiboException(WeiboException e) {
-                ToastUtil.showShort(context, e.getMessage());
-                onUserListRequestFinish.onError(e.getMessage());
+            public void onErrorResponse(VolleyError volleyError) {
+                if(currentFollowersIndex > 0){
+                    currentFollowersIndex--;
+                }
+                ToastUtil.showShort(context, volleyError.toString());
+                onUserListRequestFinish.onError(volleyError.toString());
             }
-        });*/
+        });
     }
 
     @Override
@@ -194,7 +200,7 @@ public class UserModelImp implements UserModel {
                 //add to result
                 //check no more data
                 //check result
-                currentTimelineIndex = 0;
+                currentFriendsIndex = 0;
                 mFriendsList.clear();
                 Gson gson = new Gson();
                 Log.e(TAG,"getMyRelativeUserList result:"+s);
@@ -226,8 +232,8 @@ public class UserModelImp implements UserModel {
      */
     @Override
     public void friendsNextPage(final String uid, final Context context, final OnUserListRequestFinish onUserListRequestFinish) {
-        currentTimelineIndex ++;
-        EsApiHelper.getMyRelativeUserList(uid, 1, currentTimelineIndex, new Response.Listener<String>() {
+        currentFriendsIndex ++;
+        EsApiHelper.getMyRelativeUserList(uid, 1, currentFriendsIndex, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
                 //add to result
@@ -248,8 +254,8 @@ public class UserModelImp implements UserModel {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
-                if(currentTimelineIndex > 0){
-                    currentTimelineIndex--;
+                if(currentFriendsIndex > 0){
+                    currentFriendsIndex--;
                 }
                 ToastUtil.showShort(context, volleyError.toString());
                 onUserListRequestFinish.onError(volleyError.toString());
