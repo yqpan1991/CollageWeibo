@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import apollo.edus.collageweibo.R;
@@ -34,7 +35,7 @@ public class RelativeWeiboListActivity extends Activity implements RelativeWeibo
     public static final String EXTRA_TYPE = "extra_type";
 
     public WeiboAdapter mAdapter;
-    private List<WeiboResult.WeiboInfo> mDatas;
+    private List<WeiboResult.WeiboInfo> mDatas = new ArrayList<>();
     public Context mContext;
     public SwipeRefreshLayout mSwipeRefreshLayout;
     public RecyclerView mRecyclerView;
@@ -102,6 +103,7 @@ public class RelativeWeiboListActivity extends Activity implements RelativeWeibo
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mHeaderAndFooterRecyclerViewAdapter);
         mRecyclerView.addItemDecoration(new WeiboItemSapce((int) mContext.getResources().getDimension(R.dimen.home_weiboitem_space)));
+        RecyclerViewStateUtils.setFooterViewState(this, mRecyclerView, mDatas.size(), LoadingFooter.State.Normal, null);
     }
 
     public EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {

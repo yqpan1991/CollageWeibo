@@ -30,7 +30,7 @@ public class MyWeiBoActivityPresentImp implements MyWeiBoActivityPresent {
         mUserModel.userTimeline(uid, context, new UserModel.OnStatusListFinishedListener() {
             @Override
             public void noMoreData() {
-                mMyWeiBoActivityView.hideLoadingIcon();
+                mMyWeiBoActivityView.showEndFooterView();
             }
 
             @Override

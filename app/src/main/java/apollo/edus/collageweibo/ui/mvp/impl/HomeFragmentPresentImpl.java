@@ -110,7 +110,17 @@ public class  HomeFragmentPresentImpl implements HomeFragmentPresent, EsUserMana
 
     private void reloadData() {
         mHomeModel.reloadInfo();
-        mHomeModel.updateUserLocation(null, null);
+        mHomeModel.updateUserLocation(new Response.Listener<String>() {
+            @Override
+            public void onResponse(String string) {
+                Log.e(TAG,"reload updateUserLocation:result:"+string);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.e(TAG,"reload updateUserLocation:error:"+volleyError.toString());
+            }
+        });
         mView.showUserInfo(mHomeModel.getProfile());
         mView.showLoadingIcon();
         pullToRefreshData();
@@ -148,12 +158,12 @@ public class  HomeFragmentPresentImpl implements HomeFragmentPresent, EsUserMana
             mHomeModel.updateUserLocation(new Response.Listener<String>() {
                 @Override
                 public void onResponse(String string) {
-//                    Log.e(TAG,"updateUserLocation:result:"+string);
+                    Log.e(TAG,"updateUserLocation:result:"+string);
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError volleyError) {
-//                    Log.e(TAG,"updateUserLocation:error:"+volleyError.toString());
+                    Log.e(TAG,"updateUserLocation:error:"+volleyError.toString());
                 }
             });
            /* if (null != location && location.getLocType() != BDLocation.TypeServerError) {

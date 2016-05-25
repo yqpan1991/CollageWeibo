@@ -83,6 +83,7 @@ public class HomeFragment extends EsBaseFragment implements HomeFragmentView{
         mRecyclerView.setAdapter(mHeaderAndFooterRecyclerViewAdapter);
         mRecyclerView.addItemDecoration(new WeiboItemSapce((int) getContext().getResources().getDimension(R.dimen.home_weiboitem_space)));
         mRecyclerView.addOnScrollListener(mOnScrollListener);
+        RecyclerViewStateUtils.setFooterViewState(getActivity(), mRecyclerView, mDatas.size(), LoadingFooter.State.Normal, null);
     }
 
     public EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {

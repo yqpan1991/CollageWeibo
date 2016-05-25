@@ -29,7 +29,7 @@ import apollo.edus.collageweibo.ui.widget.endlessrecyclerview.weight.LoadingFoot
 public class FollowersActivity extends Activity implements FriendActivityView {
 
     public FriendsAdapter mAdapter;
-    private ArrayList<EsUserProfile> mDatas;
+    private ArrayList<EsUserProfile> mDatas = new ArrayList<>();
     public Context mContext;
     public SwipeRefreshLayout mSwipeRefreshLayout;
     public RecyclerView mRecyclerView;
@@ -76,6 +76,7 @@ public class FollowersActivity extends Activity implements FriendActivityView {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mHeaderAndFooterRecyclerViewAdapter);
+        RecyclerViewStateUtils.setFooterViewState(FollowersActivity.this, mRecyclerView, mDatas.size(), LoadingFooter.State.Normal, null);
 
     }
 

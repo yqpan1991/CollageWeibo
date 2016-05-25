@@ -61,12 +61,12 @@ public class HomeModelImpl implements HomeModel {
                 //TODO ------暂时更改为空结果集,接口数据需要调整-----
 //                List<WeiboResult.WeiboInfo> weiboResultList = weiboResult.getList();
                 List<WeiboResult.WeiboInfo> weiboResultList = new ArrayList<WeiboResult.WeiboInfo>();
-                if(!weiboResult.hasNextPage() || weiboResultList == null || weiboResultList.isEmpty()){
-                    listener.noMoreData();
-                }
                 if(weiboResultList != null && !weiboResultList.isEmpty()){
                     mWeiboList.addAll(weiboResultList);
                     listener.onDataFinish(mWeiboList);
+                }
+                if(!weiboResult.hasNextPage() || weiboResultList == null || weiboResultList.isEmpty()){
+                    listener.noMoreData();
                 }
             }
         }, new Response.ErrorListener(){
@@ -92,12 +92,12 @@ public class HomeModelImpl implements HomeModel {
                 Log.e(TAG,"homeNextWeiboList result:"+s);
                 WeiboResult weiboResult = gson.fromJson(s, WeiboResult.class);
                 List<WeiboResult.WeiboInfo> weiboResultList = weiboResult.getList();
-                if(!weiboResult.hasNextPage() || weiboResultList == null || weiboResultList.isEmpty()){
-                    listener.noMoreData();
-                }
                 if(weiboResultList != null && !weiboResultList.isEmpty()){
                     mWeiboList.addAll(weiboResultList);
                     listener.onDataFinish(mWeiboList);
+                }
+                if(!weiboResult.hasNextPage() || weiboResultList == null || weiboResultList.isEmpty()){
+                    listener.noMoreData();
                 }
             }
         }, new Response.ErrorListener(){

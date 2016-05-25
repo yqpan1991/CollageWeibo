@@ -32,7 +32,7 @@ import apollo.edus.collageweibo.ui.widget.endlessrecyclerview.weight.LoadingFoot
 public class MyWeiboActivity extends Activity implements MyWeiBoActivityView{
 
     public WeiboAdapter mAdapter;
-    private List<WeiboResult.WeiboInfo> mDatas;
+    private List<WeiboResult.WeiboInfo> mDatas = new ArrayList<>();
     public Context mContext;
     public SwipeRefreshLayout mSwipeRefreshLayout;
     public RecyclerView mRecyclerView;
@@ -79,6 +79,7 @@ public class MyWeiboActivity extends Activity implements MyWeiBoActivityView{
         mRecyclerView.setAdapter(mHeaderAndFooterRecyclerViewAdapter);
 //        RecyclerViewUtils.setHeaderView(mRecyclerView, new SeachHeadView(mContext));
         mRecyclerView.addItemDecoration(new WeiboItemSapce((int) mContext.getResources().getDimension(R.dimen.home_weiboitem_space)));
+        RecyclerViewStateUtils.setFooterViewState(this, mRecyclerView, mDatas.size(), LoadingFooter.State.Normal, null);
     }
 
     public EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {

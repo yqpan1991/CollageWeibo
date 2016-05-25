@@ -74,12 +74,12 @@ public class UserModelImp implements UserModel {
                 Log.e(TAG,"userTimeline result:"+s);
                 WeiboResult weiboResult = gson.fromJson(s, WeiboResult.class);
                 List<WeiboResult.WeiboInfo> weiboResultList = weiboResult.getList();
-                if(!weiboResult.hasNextPage() || weiboResultList == null || weiboResultList.isEmpty()){
-                    onStatusFinishedListener.noMoreData();
-                }
                 if(weiboResultList != null && !weiboResultList.isEmpty()){
                     mStatusList.addAll(weiboResultList);
                     onStatusFinishedListener.onDataFinish(mStatusList);
+                }
+                if(!weiboResult.hasNextPage() || weiboResultList == null || weiboResultList.isEmpty()){
+                    onStatusFinishedListener.noMoreData();
                 }
             }
         }, new Response.ErrorListener() {
@@ -104,12 +104,12 @@ public class UserModelImp implements UserModel {
                 Gson gson = new Gson();
                 WeiboResult weiboResult = gson.fromJson(s, WeiboResult.class);
                 List<WeiboResult.WeiboInfo> weiboResultList = weiboResult.getList();
-                if(!weiboResult.hasNextPage() || weiboResultList == null || weiboResultList.isEmpty()){
-                    onStatusFinishedListener.noMoreData();
-                }
                 if(weiboResultList != null && !weiboResultList.isEmpty()){
                     mStatusList.addAll(weiboResultList);
                     onStatusFinishedListener.onDataFinish(mStatusList);
+                }
+                if(!weiboResult.hasNextPage() || weiboResultList == null || weiboResultList.isEmpty()){
+                    onStatusFinishedListener.noMoreData();
                 }
             }
         }, new Response.ErrorListener() {
@@ -140,12 +140,12 @@ public class UserModelImp implements UserModel {
                 Log.e(TAG,"getMyRelativeUserList result:"+s);
                 UserResult userResult = gson.fromJson(s, UserResult.class);
                 List<EsUserProfile> userProfileList = userResult.getList();
-                if(!userResult.hasNextPage() || userProfileList == null || userProfileList.isEmpty()){
-                    onUserListRequestFinish.noMoreData();
-                }
                 if(userProfileList != null && !userProfileList.isEmpty()){
                     mFollowersList.addAll(userProfileList);
                     onUserListRequestFinish.onDataFinish(mFollowersList);
+                }
+                if(!userResult.hasNextPage() || userProfileList == null || userProfileList.isEmpty()){
+                    onUserListRequestFinish.noMoreData();
                 }
             }
         }, new Response.ErrorListener() {
@@ -170,12 +170,12 @@ public class UserModelImp implements UserModel {
                 Log.e(TAG,"getMyRelativeUserList result:"+s);
                 UserResult userResult = gson.fromJson(s, UserResult.class);
                 List<EsUserProfile> userProfileList = userResult.getList();
-                if(!userResult.hasNextPage() || userProfileList == null || userProfileList.isEmpty()){
-                    onUserListRequestFinish.noMoreData();
-                }
                 if(userProfileList != null && !userProfileList.isEmpty()){
                     mFollowersList.addAll(userProfileList);
                     onUserListRequestFinish.onDataFinish(mFollowersList);
+                }
+                if(!userResult.hasNextPage() || userProfileList == null || userProfileList.isEmpty()){
+                    onUserListRequestFinish.noMoreData();
                 }
             }
         }, new Response.ErrorListener() {
@@ -206,12 +206,12 @@ public class UserModelImp implements UserModel {
                 Log.e(TAG,"getMyRelativeUserList result:"+s);
                 UserResult userResult = gson.fromJson(s, UserResult.class);
                 List<EsUserProfile> userProfileList = userResult.getList();
-                if(!userResult.hasNextPage() || userProfileList == null || userProfileList.isEmpty()){
-                    onUserListRequestFinish.noMoreData();
-                }
                 if(userProfileList != null && !userProfileList.isEmpty()){
                     mFriendsList.addAll(userProfileList);
                     onUserListRequestFinish.onDataFinish(mFriendsList);
+                }
+                if(!userResult.hasNextPage() || userProfileList == null || userProfileList.isEmpty()){
+                    onUserListRequestFinish.noMoreData();
                 }
             }
         }, new Response.ErrorListener() {
@@ -243,12 +243,12 @@ public class UserModelImp implements UserModel {
                 Log.e(TAG,"getMyRelativeUserList result:"+s);
                 UserResult userResult = gson.fromJson(s, UserResult.class);
                 List<EsUserProfile> userProfileList = userResult.getList();
-                if(!userResult.hasNextPage() || userProfileList == null || userProfileList.isEmpty()){
-                    onUserListRequestFinish.noMoreData();
-                }
                 if(userProfileList != null && !userProfileList.isEmpty()){
                     mFriendsList.addAll(userProfileList);
                     onUserListRequestFinish.onDataFinish(mFriendsList);
+                }
+                if(!userResult.hasNextPage() || userProfileList == null || userProfileList.isEmpty()){
+                    onUserListRequestFinish.noMoreData();
                 }
             }
         }, new Response.ErrorListener() {

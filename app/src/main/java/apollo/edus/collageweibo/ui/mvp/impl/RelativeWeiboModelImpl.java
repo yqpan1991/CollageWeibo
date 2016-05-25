@@ -37,12 +37,12 @@ public class RelativeWeiboModelImpl implements RelativeWeiboModel {
                 Gson gson = new Gson();
                 WeiboResult weiboResult = gson.fromJson(s, WeiboResult.class);
                 List<WeiboResult.WeiboInfo> weiboResultList = weiboResult.getList();
-                if(!weiboResult.hasNextPage() || weiboResultList == null || weiboResultList.isEmpty()){
-                    onStatusFinishedListener.noMoreData();
-                }
                 if(weiboResultList != null && !weiboResultList.isEmpty()){
                     mStatusList.addAll(weiboResultList);
                     onStatusFinishedListener.onDataFinish(mStatusList);
+                }
+                if(!weiboResult.hasNextPage() || weiboResultList == null || weiboResultList.isEmpty()){
+                    onStatusFinishedListener.noMoreData();
                 }
             }
         }, new Response.ErrorListener() {
@@ -67,12 +67,12 @@ public class RelativeWeiboModelImpl implements RelativeWeiboModel {
                 Gson gson = new Gson();
                 WeiboResult weiboResult = gson.fromJson(s, WeiboResult.class);
                 List<WeiboResult.WeiboInfo> weiboResultList = weiboResult.getList();
-                if(!weiboResult.hasNextPage() || weiboResultList == null || weiboResultList.isEmpty()){
-                    onStatusFinishedListener.noMoreData();
-                }
                 if(weiboResultList != null && !weiboResultList.isEmpty()){
                     mStatusList.addAll(weiboResultList);
                     onStatusFinishedListener.onDataFinish(mStatusList);
+                }
+                if(!weiboResult.hasNextPage() || weiboResultList == null || weiboResultList.isEmpty()){
+                    onStatusFinishedListener.noMoreData();
                 }
             }
         }, new Response.ErrorListener() {
