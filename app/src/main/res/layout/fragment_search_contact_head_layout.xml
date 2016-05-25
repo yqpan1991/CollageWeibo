@@ -25,7 +25,7 @@
         android:paddingRight="10dp"
         android:paddingTop="7dp"
         android:singleLine="true"
-        android:text="我的快牙号/昵称：11056/se"
+        android:text="我的号/昵称：11056/se"
         android:textColor="@color/color_black_alpha_54"
         android:textSize="@dimen/text_size_33" />
 
