@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -25,6 +26,8 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -599,10 +602,10 @@ public class FillContent {
         }*/
 
         friendName.setText(profile.getDisplayName());
-        if (profile.getUserSgin() != null) {
+        if (!TextUtils.isEmpty(profile.getUserSgin())) {
             friendContent.setText(profile.getUserSgin());
         }else{
-            friendContent.setText("");
+            friendContent.setText("用户很懒，没有签名,揍死丫的");
         }
     }
 
