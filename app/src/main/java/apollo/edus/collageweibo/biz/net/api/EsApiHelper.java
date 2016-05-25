@@ -335,12 +335,16 @@ public class EsApiHelper {
         VolleySingleton.addRequest(stringRequest);
     }
 
-    public static void getHomePage(){
-        //TODO -------
+    public static void getHomePage(final String userId, final String longitude, final String latitude, int pageSize, Response.Listener<String> sucListener, Response.ErrorListener errorListener){
+        CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.GET, EsApi.getFullUrl(EsApi.HOME_PAGE_URL, "102", userId, longitude, latitude, pageSize+""), sucListener, errorListener);
+        stringRequest.setShouldCache(false);
+        VolleySingleton.addRequest(stringRequest);
     }
 
-    public static void updateUserLocation(){
-        //TODO ------
+    public static void updateUserLocation(final String userId, final String longitude, final String latitude, Response.Listener<String> sucListener, Response.ErrorListener errorListener){
+        CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.GET, EsApi.getFullUrl(EsApi.UPDATE_LOCATION_USER_URL, "103", userId, longitude, latitude ), sucListener, errorListener);
+        stringRequest.setShouldCache(false);
+        VolleySingleton.addRequest(stringRequest);
     }
 
 

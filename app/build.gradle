@@ -27,9 +27,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
     signingConfigs{
         debug{
-//            storeFile file(rootDir.absolutePath+"/config/debug.keystore")
+            storeFile file(rootDir.absolutePath+"/config/debug.keystore")
         }
     }
 }
