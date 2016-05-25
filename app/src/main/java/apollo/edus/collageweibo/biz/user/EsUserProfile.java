@@ -83,6 +83,14 @@ public class EsUserProfile implements Serializable{
         this.school = school;
     }
 
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
     public Date getAdmissionTime() {
         if(TextUtils.isEmpty(admissionTime)){
             return null;

@@ -2,6 +2,7 @@ package apollo.edus.collageweibo.biz.net.api;
 
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -336,7 +337,13 @@ public class EsApiHelper {
     }
 
     public static void getHomePage(final String userId, final String longitude, final String latitude, int pageSize, Response.Listener<String> sucListener, Response.ErrorListener errorListener){
-        CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.GET, EsApi.getFullUrl(EsApi.HOME_PAGE_URL, "102", userId, longitude, latitude, pageSize+""), sucListener, errorListener);
+        String url = null;
+        if(TextUtils.isEmpty(userId)){
+            url = EsApi.getFullUrl(EsApi.HOME_PAGE_URL, "102", longitude, latitude, pageSize+"");
+        }else{
+            url = EsApi.getFullUrl(EsApi.HOME_PAGE_WITH_USER_URL, "102", userId, longitude, latitude, pageSize+"");
+        }
+        CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.GET, url, sucListener, errorListener);
         stringRequest.setShouldCache(false);
         VolleySingleton.addRequest(stringRequest);
     }

@@ -228,7 +228,7 @@ public class ProfileFragment extends EsBaseFragment implements EsUserManager.OnU
     }
 
     @Override
-    public void onUserLout() {
+    public void onUserLogout() {
         checkLoadData();
     }
 

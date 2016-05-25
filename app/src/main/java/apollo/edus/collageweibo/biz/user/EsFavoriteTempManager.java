@@ -57,7 +57,7 @@ public class EsFavoriteTempManager implements EsUserManager.OnUserLogOperationLi
     }
 
     @Override
-    public void onUserLout() {
+    public void onUserLogout() {
         favoriteWeiboList.clear();
     }
 }

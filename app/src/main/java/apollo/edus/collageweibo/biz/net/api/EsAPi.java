@@ -19,7 +19,8 @@ public class EsApi {
     public final static String FOLLOW_URL = "?por=%s&userid=%s&action=%s&in_userid=%s";
     public final static String MY_RELATIVE_USER_URL = "?por=%s&userid=%s&type=%s";
     public final static String UPDATE_LOCATION_USER_URL = "?por=%s&userid=%s&longitude=%s&latitude=%s";
-    public final static String HOME_PAGE_URL = "?por=%s&userid=%s&longitude=%s&latitude=%s&pageSize=%s";
+    public final static String HOME_PAGE_WITH_USER_URL = "?por=%s&userid=%s&longitude=%s&latitude=%s&pageSize=%s";
+    public final static String HOME_PAGE_URL = "?por=%s&longitude=%s&latitude=%s&pageSize=%s";
 
     public static String getFullUrl(String url){
         return HOST + url;

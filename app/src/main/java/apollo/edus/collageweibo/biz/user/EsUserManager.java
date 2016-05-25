@@ -82,7 +82,11 @@ public class EsUserManager {
     }
 
     public EsUserProfile getUserProfile(){
-        return new Gson().fromJson(EsPreferencesUtils.getString(EsGlobal.getGlobalContext(), KEY_NATIVE_USERPROFILE, null), EsUserProfile.class);
+        if(hasLogIn()){
+            return new Gson().fromJson(EsPreferencesUtils.getString(EsGlobal.getGlobalContext(), KEY_NATIVE_USERPROFILE, null), EsUserProfile.class);
+        }else{
+            return null;
+        }
     }
 
     public void clearNativeUserProfile(){
@@ -112,7 +116,7 @@ public class EsUserManager {
 
     public void notifyUserLogout(){
         for(OnUserLogOperationListener listener : mOnUserLogOperationList){
-            listener.onUserLout();
+            listener.onUserLogout();
         }
     }
 
@@ -124,7 +128,7 @@ public class EsUserManager {
 
     public interface OnUserLogOperationListener{
         public void onUserLogin();
-        public void onUserLout();
+        public void onUserLogout();
     }
 
 }
