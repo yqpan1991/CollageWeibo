@@ -247,7 +247,7 @@ public class SearchActivity extends Activity {
                 errorTip = "查询失败，请联网后重试";
             }
         } else {
-            errorTip = "查询失败，请稍后重试";
+            errorTip = error.toString();
         }
         adapter.setData(null);
         setStatus(STATUS_ERROR, errorTip, false);
