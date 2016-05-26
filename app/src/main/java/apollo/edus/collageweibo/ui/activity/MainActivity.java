@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -62,6 +63,11 @@ public class MainActivity extends FragmentActivity {
         mFragmentManager = getSupportFragmentManager();
         setTabFragment(HOME_FRAGMENT);
         setUpListener();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //without saving state,解决重影的问题
     }
 
     private void setUpListener() {
