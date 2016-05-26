@@ -57,11 +57,11 @@ public class HomeModelImpl implements HomeModel {
                 mWeiboList.clear();
                 Gson gson = new Gson();
                 Log.e(TAG,"homeFirstWeiboList result:"+s);
-//                WeiboResult weiboResult = gson.fromJson(s, WeiboResult.class);
-                WeiboResult weiboResult = new WeiboResult();
+                WeiboResult weiboResult = gson.fromJson(s, WeiboResult.class);
+//                WeiboResult weiboResult = new WeiboResult();
                 //TODO ------暂时更改为空结果集,接口数据需要调整-----
-//                List<WeiboResult.WeiboInfo> weiboResultList = weiboResult.getList();
-                List<WeiboResult.WeiboInfo> weiboResultList = new ArrayList<WeiboResult.WeiboInfo>();
+                List<WeiboResult.WeiboInfo> weiboResultList = weiboResult.getList();
+//                List<WeiboResult.WeiboInfo> weiboResultList = new ArrayList<WeiboResult.WeiboInfo>();
                 if(weiboResultList != null && !weiboResultList.isEmpty()){
                     mWeiboList.addAll(weiboResultList);
                     listener.onDataFinish(mWeiboList);

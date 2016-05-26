@@ -20,4 +20,6 @@ public class EsApiKeys {
     public static final String KEY_SUFFIX = "suffix";
     public static final String KEY_FAVORITE_ACTION = "action";
     public static final String KEY_WEIBO_TYPE = "weibo_id";
+
+    public static final String KEY_FORWARDING_USERID = "forwarding_userid";
 }

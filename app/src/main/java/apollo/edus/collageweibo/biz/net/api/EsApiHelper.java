@@ -111,6 +111,23 @@ public class EsApiHelper {
         VolleySingleton.addRequest(stringRequest);
     }
 
+
+    public static void retweetWebibo(final String userId, final String contents, final String weiboId, final String forwardingUserId, Response.Listener<String> sucListener, Response.ErrorListener errorListener) {
+        CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getHost(), sucListener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put(EsApiKeys.KEY_PORT, "902");
+                hashMap.put(EsApiKeys.KEY_USERID, userId);
+                hashMap.put(EsApiKeys.KEY_CONTNETS, contents);
+                hashMap.put(EsApiKeys.KEY_FORWARDING_USERID, forwardingUserId);
+                hashMap.put(EsApiKeys.KEY_WEIBO_ID, weiboId);
+                return hashMap;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
+    }
+
     public static void shareImageWeibo(final String contents, final List<ImageInfo> imageList, final Response.Listener<String> sucListener, final Response.ErrorListener errorListener) {
         if (imageList == null || imageList.isEmpty()) {
             shareContentWeibo(contents, sucListener, errorListener);
@@ -203,9 +220,6 @@ public class EsApiHelper {
         VolleySingleton.addRequest(stringRequest);
     }
 
-    public static void retweetWebibo(String contents, String weiboId, String forwardingUserId, Response.Listener<String> sucListener, Response.ErrorListener errorListener) {
-
-    }
 
     public static void deleteWeibo(final String weiboId, Response.Listener<String> sucListener, Response.ErrorListener errorListener) {
         final String userId = EsUserManager.getInstance().getUserInfo().getUserId();

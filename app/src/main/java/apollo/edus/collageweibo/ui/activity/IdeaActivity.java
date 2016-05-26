@@ -27,11 +27,13 @@ import apollo.edus.collageweibo.R;
 import apollo.edus.collageweibo.biz.bean.AlbumFolderInfo;
 import apollo.edus.collageweibo.biz.bean.ImageInfo;
 import apollo.edus.collageweibo.biz.bean.WeiboResult;
+import apollo.edus.collageweibo.biz.global.EsGlobal;
 import apollo.edus.collageweibo.biz.net.api.EsApiHelper;
 import apollo.edus.collageweibo.biz.user.EsUserManager;
 import apollo.edus.collageweibo.ui.imglist.ImgListAdapter;
 import apollo.edus.collageweibo.utils.FillContent;
 import apollo.edus.collageweibo.utils.ToastUtil;
+import apollo.edus.collageweibo.utils.WeiBoContentTextUtil;
 
 /**
  * Created by wenmingvs on 16/5/2.
@@ -130,7 +132,9 @@ public class IdeaActivity extends Activity implements ImgListAdapter.OnFooterVie
         mEditText.setHint("说说分享的心得");
 
         if(mStatus.getForwarding() && mStatus.getOrginMessage() != null){//转发的内容是转发微博
-            Toast.makeText(this, "未处理转发的微博", Toast.LENGTH_SHORT).show();
+            mEditText.setText(WeiBoContentTextUtil.getWeiBoContent("//@" + mStatus.getUserInfo().getDisplayName() + ":" + mStatus.getContent(), mContext, mEditText));
+            FillContent.FillCenterContent(mStatus.getOrginMessage(), repostImg, repostName, repostContent);
+            mEditText.setSelection(0);
         }else{
             //转发的内容是原创微博
             FillContent.FillCenterContent(mStatus, repostImg, repostName, repostContent);
@@ -231,18 +235,43 @@ public class IdeaActivity extends Activity implements ImgListAdapter.OnFooterVie
                 }
 
                 if(mSelectImgList.isEmpty()){
-                    EsApiHelper.shareContentWeibo(mEditText.getText().toString(), new Response.Listener<String>() {
+                    if(mStatus != null){
+                        //如果是原微博，那么直接取weiboId
+                        //如果是转发的微博，取转发嗯嗯weiboId
+                        WeiboResult.WeiboInfo origin = mStatus;
+                        if(mStatus.getForwarding() && mStatus.getOrginMessage() != null){
+                            origin = mStatus.getOrginMessage();
+                        }
+                        final String userId = EsUserManager.getInstance().getUserInfo().getUserId();
+                        EsApiHelper.retweetWebibo(userId,mEditText.getText().toString(),origin.getWeiboId(),origin.getUserid(),new Response.Listener<String>() {
 
-                        @Override
-                        public void onResponse(String s) {
-                            Log.e(TAG,"SUC:"+s);
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError volleyError) {
-                            Log.e(TAG,"fail:"+volleyError.toString());
-                        }
-                    });
+                            @Override
+                            public void onResponse(String s) {
+                                ToastUtil.showShort(EsGlobal.getGlobalContext(),"转发成功");
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError volleyError) {
+                                ToastUtil.showShort(EsGlobal.getGlobalContext(),"转发失败");
+                            }
+                        });
+
+                    }else{
+                        EsApiHelper.shareContentWeibo(mEditText.getText().toString(), new Response.Listener<String>() {
+
+                            @Override
+                            public void onResponse(String s) {
+                                ToastUtil.showShort(EsGlobal.getGlobalContext(),"发布成功");
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError volleyError) {
+                                ToastUtil.showShort(EsGlobal.getGlobalContext(),"发布失败");
+                            }
+                        });
+                    }
+                    //retweet weibo
+
                 }else{
                     //send
                     EsApiHelper.shareImageWeibo(mEditText.getText().toString(), mSelectImgList, new Response.Listener<String>(){

@@ -291,8 +291,12 @@ public class FillContent {
      * 填充微博文字内容
      */
     public static void fillWeiBoContent(String text, Context context, EmojiTextView weibo_content) {
-        weibo_content.setText(WeiBoContentTextUtil.getWeiBoContent(text, context, weibo_content));
-        weibo_content.setMovementMethod(LinkMovementMethod.getInstance());
+        if(TextUtils.isEmpty(text)){
+            weibo_content.setText("");
+        }else{
+            weibo_content.setText(WeiBoContentTextUtil.getWeiBoContent(text, context, weibo_content));
+            weibo_content.setMovementMethod(LinkMovementMethod.getInstance());
+        }
     }
 
     /**
@@ -352,16 +356,16 @@ public class FillContent {
      * 转发的文字
      */
     public static void fillRetweetContent(WeiboResult.WeiboInfo weiboInfo, Context context, TextView origin_nameAndcontent) {
-/*        if (status.retweeted_status.user != null) {
+        if (weiboInfo.getForwarding() && weiboInfo.getOrginMessage() != null ) {
             StringBuffer retweetcontent_buffer = new StringBuffer();
             retweetcontent_buffer.setLength(0);
             retweetcontent_buffer.append("@");
-            retweetcontent_buffer.append(status.retweeted_status.user.name + " :  ");
-            retweetcontent_buffer.append(status.retweeted_status.text);
+            retweetcontent_buffer.append(weiboInfo.getOrginMessage().getUserid()+" :  ");
+            retweetcontent_buffer.append(weiboInfo.getOrginMessage().getContent());
             origin_nameAndcontent.setText(WeiBoContentTextUtil.getWeiBoContent(retweetcontent_buffer.toString(), context, origin_nameAndcontent));
         } else {
             origin_nameAndcontent.setText("抱歉，此微博已被作者删除。查看帮助：#网页链接#");
-        }*/
+        }
 
     }
 

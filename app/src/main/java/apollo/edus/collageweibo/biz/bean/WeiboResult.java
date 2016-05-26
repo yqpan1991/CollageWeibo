@@ -43,7 +43,7 @@ public class WeiboResult {
         private String weiboId;
         @SerializedName("userid")
         private String userid;
-        @SerializedName("create_time")
+//        @SerializedName("create_time")
         private long createTime;
         @SerializedName("nickname")
         private String nickname;
@@ -57,7 +57,7 @@ public class WeiboResult {
         private int mreply;
         @SerializedName("mcopy")
         private int mcopy;
-//        @SerializedName("orgin_message")
+        @SerializedName("orgin_message")
         private WeiboInfo orginMessage;
 
 
