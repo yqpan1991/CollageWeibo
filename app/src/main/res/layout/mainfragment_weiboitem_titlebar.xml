@@ -59,6 +59,15 @@
                 android:visibility="gone"
                 android:textColor="@color/home_weiboitem_title_profile_time"
                 android:textSize="@dimen/home_weiboitem_title_weibocomefrom" />
+
+            <TextView
+                android:id="@+id/weiboDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:visibility="visible"
+                android:textColor="@color/home_weiboitem_title_profile_time"
+                android:textSize="@dimen/home_weiboitem_title_weibocomefrom" />
         </LinearLayout>
 
     </LinearLayout>

@@ -121,7 +121,7 @@ public class FillContent {
      * @param profile_time
      * @param weibo_comefrom
      */
-    public static void fillTitleBar(Context context, WeiboResult.WeiboInfo weiboInfo, ImageView profile_img, ImageView profile_verified, TextView profile_name, TextView profile_time, TextView weibo_comefrom) {
+    public static void fillTitleBar(Context context, WeiboResult.WeiboInfo weiboInfo, ImageView profile_img, ImageView profile_verified, TextView profile_name, TextView profile_time, TextView weibo_comefrom , TextView weibo_distance) {
         fillProfileImg(context, weiboInfo.getUserInfo(), profile_img, profile_verified);
         if(weiboInfo.getUserInfo() == null){
             profile_name.setText("");
@@ -129,8 +129,17 @@ public class FillContent {
             profile_name.setText(weiboInfo.getUserInfo().getDisplayName());
         }
         setWeiBoTime(profile_time, weiboInfo.getCreateTime());
+        setWeiboDistance(weibo_distance, weiboInfo.getUserInfo());
 //        setWeiBoTime(profile_time, status.created_at);
 //        setWeiBoComeFrom(weibo_comefrom, status.source);
+    }
+
+    private static void setWeiboDistance(TextView weibo_distance, EsUserProfile userInfo) {
+        if(userInfo == null || userInfo.getValidDistance() < 0){
+            weibo_distance.setText("距离未知");
+        }else{
+            weibo_distance.setText("距离"+userInfo.getValidDistance()+"米");
+        }
     }
 
 /*    public static void setWeiBoTime(TextView textView, String created_at) {

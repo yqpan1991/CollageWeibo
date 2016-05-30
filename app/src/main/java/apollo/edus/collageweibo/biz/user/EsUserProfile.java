@@ -42,6 +42,10 @@ public class EsUserProfile implements Serializable{
     @SerializedName("attention")
     private long attention;
 
+    @SerializedName("distance")
+    private String distance;
+
+
     public String getAvatorUrl() {
         return avatorUrl;
     }
@@ -171,5 +175,20 @@ public class EsUserProfile implements Serializable{
         }else{
             return nickName;
         }
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    public long getValidDistance(){
+        if(TextUtils.isEmpty(distance)){
+            return -1;
+        }
+        return Long.valueOf(distance);
     }
 }
