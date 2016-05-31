@@ -67,6 +67,7 @@
         <activity android:name=".ui.activity.FriendsActivity" />
         <activity android:name=".ui.activity.FollowersActivity" />
         <activity android:name=".ui.activity.SearchActivity" />
+        <activity android:name=".ui.activity.UserDetailActivity" />
 
     </application>
 

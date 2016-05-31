@@ -43,6 +43,7 @@ import apollo.edus.collageweibo.biz.user.EsUserManager;
 import apollo.edus.collageweibo.biz.user.EsUserProfile;
 import apollo.edus.collageweibo.ui.activity.IdeaActivity;
 import apollo.edus.collageweibo.ui.activity.LoginActivity;
+import apollo.edus.collageweibo.ui.activity.UserDetailActivity;
 import apollo.edus.collageweibo.ui.widget.emojitextview.EmojiTextView;
 
 /**
@@ -102,9 +103,9 @@ public class FillContent {
         profile_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*                Intent intent = new Intent(context, UserActivity.class);
+                Intent intent = new Intent(context, UserDetailActivity.class);
                 intent.putExtra("user", user);
-                context.startActivity(intent);*/
+                context.startActivity(intent);
 
             }
         });
