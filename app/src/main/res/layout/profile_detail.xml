@@ -34,7 +34,7 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/et_username"
+                android:id="@+id/et_nickname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
@@ -51,7 +51,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_alignLeft="@id/et_username"
+                android:layout_alignLeft="@id/et_nickname"
                 android:layout_alignParentBottom="true"
                 android:background="#b3b3b3"
 
@@ -105,6 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:visibility="gone"
             android:layout_marginTop="10dp">
 
             <TextView
@@ -137,40 +138,6 @@
                 />
         </RelativeLayout>
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/tv_birth"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="生日"
-                android:textColor="@color/color_black_alpha_60"
-                android:textSize="18sp" />
-
-            <DatePicker
-                android:id="@+id/dp_birth"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="11dp"
-                android:layout_toRightOf="@id/tv_birth" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignLeft="@id/dp_birth"
-                android:layout_alignParentBottom="true"
-                android:background="#b3b3b3"
-
-                />
-        </RelativeLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -218,41 +185,6 @@
                 android:layout_alignLeft="@id/et_school"
                 android:layout_alignParentBottom="true"
                 android:background="#b3b3b3" />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:id="@+id/tv_went_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="生日"
-                android:textColor="@color/color_black_alpha_60"
-                android:textSize="18sp" />
-
-            <DatePicker
-                android:id="@+id/dp_went_time"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="11dp"
-                android:layout_toRightOf="@id/tv_went_time" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignLeft="@id/dp_went_time"
-                android:layout_alignParentBottom="true"
-                android:background="#b3b3b3"
-
-                />
         </RelativeLayout>
 
     </LinearLayout>

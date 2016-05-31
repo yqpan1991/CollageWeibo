@@ -1,5 +1,7 @@
 package apollo.edus.collageweibo.biz.net.api;
 
+import apollo.edus.collageweibo.utils.UrlUtils;
+
 /**
  * Created by Panda on 2016/5/21.
  */
@@ -27,6 +29,8 @@ public class EsApi {
     }
 
     public static String getFullUrl(String url,String... params){
-        return String.format(HOST+url,params);
+        return UrlUtils.getEncodedUrl(String.format(HOST+url,params));
     }
+
+
 }

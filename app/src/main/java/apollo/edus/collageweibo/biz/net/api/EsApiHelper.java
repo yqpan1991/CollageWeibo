@@ -368,6 +368,22 @@ public class EsApiHelper {
         VolleySingleton.addRequest(stringRequest);
     }
 
+    public static void updateUserProfile(final String userId, final String userNickName, final String signature, final String school, Response.Listener<String> sucListener, Response.ErrorListener errorListener){
+        CustomStringRequest stringRequest = new CustomStringRequest(Request.Method.POST, EsApi.getHost(), sucListener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put(EsApiKeys.KEY_PORT, "1005");
+                hashMap.put(EsApiKeys.KEY_USERID, userId);
+                hashMap.put(EsApiKeys.KEY_NICKNAME, userNickName);
+                hashMap.put(EsApiKeys.KEY_SIGNATURE, signature);
+                hashMap.put(EsApiKeys.KEY_SCHOOL, school);
+                return hashMap;
+            }
+        };
+        VolleySingleton.addRequest(stringRequest);
+    }
+
 
 
 }

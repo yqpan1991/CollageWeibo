@@ -10,6 +10,8 @@ public class EsApiKeys {
     public static final String KEY_PASSOWORD = "pwd";
     public static final String KEY_PORT = "por";
     public static final String KEY_NICKNAME = "nickname";
+    public static final String KEY_SCHOOL= "school";
+    public static final String KEY_SIGNATURE= "user_sgin";
     public static final String KEY_KEYWORDS = "keywords";
     public static final String KEY_PAGESIZE = "pageSize";
     public static final String KEY_PAGENUM = "pageNum";
